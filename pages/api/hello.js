@@ -15,7 +15,7 @@ export default async function handler(req, res) {
      Include specific names of venues, establishments, and attractions. 
      Each day should comprise at least two distinct activities if applicable with reccomendations to specefic places with phone number and any other information needed to make a reservation and explain why these places are worth visiting. 
      Ascertain the validity of your response as a JSON object with no extraneous whitespace or newline characters. 
-     Adhere to the following format: {"itinerary": [{"day": 1, "activity": "planned activity"}]}. 
+     Adhere to the following format: {"itinerary": [{"day": 1, "activity": "planned activity", "cost": "description of the cost breakdown for the day. at the bare minimum add a estimate."}]}. 
      Respond solely in JSON format, refraining from additional commentary.
     
      Here are the trip details: 

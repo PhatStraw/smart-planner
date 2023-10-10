@@ -4,6 +4,7 @@ import ky from 'ky';
 import Loader from 'components/components/loader';
 import Nav from 'components/components/nav';
 import SideBar from 'components/components/sidebar';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Home() {
   const [destination, setDestination] = useState("")
@@ -16,13 +17,40 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [plan, setPlan] = useState()
 
-  const makePlans = async () => {
-    setLoading(true)
-    const response = await ky.post("/api/hello", {timeout: 30000, json: { destination, activity, startDate, endDate, budget, interest, sideNote }}).json() // body data type must match "Content-Type" header; // parses JSON response into native JavaScript objects
-    setLoading(false)
-    const data = JSON.parse(response.data).itinerary
-    setPlan(data)
-  }
+  const makePlans = () => {
+    // Wrapping the async operation in a promise
+    const planPromise = new Promise(async (resolve, reject) => {
+      try {
+        setLoading(true);
+        const response = await ky.post("/api/hello", {
+          timeout: 30000,
+          json: {
+            destination, activity, startDate, endDate,
+            budget, interest, sideNote
+          }
+        }).json();
+        
+        setLoading(false);
+        const data = JSON.parse(response.data).itinerary;
+        setPlan(data);
+        resolve();  // Resolving the promise if everything goes well
+      } catch (error) {
+        setLoading(false);
+        reject(error);  // Rejecting the promise if there's an error
+      }
+    });
+  
+    // Passing the promise to toast.promise
+    toast.promise(
+      planPromise,
+      {
+        loading: 'Planning...',
+        success: <b>Plans saved!</b>,
+        error: <b>Could not plan.</b>,
+      }
+    );
+  };
+  
 
   return (
     <>
@@ -34,6 +62,7 @@ export default function Home() {
       </Head>
       <main className="">
       <Nav />
+      <Toaster />
         <div className='flex flex-row h-[92vh] w-[100vw]'>
          <SideBar 
           makePlans={makePlans} 
@@ -54,6 +83,8 @@ export default function Home() {
                   <span>Day:{i.day}</span>
                   <br />
                   <p>Activity:{i.activity}</p>
+                  <br />
+                  <p>Cost Breakdown:{i.cost}</p>
                   <br />
                   <br />
                 </div>
