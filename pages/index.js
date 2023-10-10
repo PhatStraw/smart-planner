@@ -18,7 +18,7 @@ export default function Home() {
 
   const makePlans = async () => {
     setLoading(true)
-    const response = await ky.post("/api/hello", {json: { destination, activity, startDate, endDate, budget, interest, sideNote }}).json() // body data type must match "Content-Type" header; // parses JSON response into native JavaScript objects
+    const response = await ky.post("/api/hello", {timeout: 30000, json: { destination, activity, startDate, endDate, budget, interest, sideNote }}).json() // body data type must match "Content-Type" header; // parses JSON response into native JavaScript objects
     setLoading(false)
     const data = JSON.parse(response.data).itinerary
     setPlan(data)
