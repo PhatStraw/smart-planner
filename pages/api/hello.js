@@ -3,7 +3,8 @@ import { OpenAI } from 'langchain/llms/openai';
 
 const openai = new OpenAI({
   openAIApiKey: process.env.NEXT_OPENAI_API,
-  maxTokens: 3097 // defaults to process.env["OPENAI_API_KEY"]
+  maxTokens: 3097,
+  tiktokenModelName: "gpt-4"// defaults to process.env["OPENAI_API_KEY"]
 });
 
 export default async function handler(req, res) {
