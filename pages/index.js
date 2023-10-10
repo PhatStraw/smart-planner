@@ -49,8 +49,8 @@ export default function Home() {
           />
          <div className="flex flex-col flex-grow w-full bg-white shadow-xl rounded-lg overflow-hidden">
              {!loading ? (<div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
-              {!plan ? <div>"Select the options to your left and let us know any specefics we may need to know in the input below..."</div> : plan.map((i) => (
-                <div>
+              {!plan ? <div>Select the options to your left and let us know any specefics we may need to know in the input below...</div> : plan.map((i) => (
+                <div key={i.day}>
                   <span>Day:{i.day}</span>
                   <br />
                   <br />
