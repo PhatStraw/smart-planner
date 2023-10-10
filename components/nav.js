@@ -1,25 +1,15 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
+import { useState } from 'react'
+import { Dialog, Popover } from '@headlessui/react'
 import {
-  ArrowPathIcon,
   Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import Logo from '../public/thirteen.svg'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-const handleThis = () => {
-    console.log('hello')
-}
-handleThis()
   return (
     <header className="bg-emerald-500">
       <nav className=" flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">

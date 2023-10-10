@@ -53,9 +53,7 @@ export default function Home() {
                 <div key={i.day}>
                   <span>Day:{i.day}</span>
                   <br />
-                  <br />
                   <p>Activity:{i.activity}</p>
-                  <br />
                   <br />
                   <br />
                 </div>
