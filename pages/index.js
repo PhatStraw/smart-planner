@@ -1,4 +1,6 @@
+import DatePickerComp from 'components/components/datePicker';
 import Head from 'next/head'
+import axios from 'axios';
 import { useState } from 'react';
 import Select from 'react-select'
 
@@ -22,7 +24,6 @@ const InterestOptions = [
   { value: "Sports", label: "Sports" },
   { value: "Art and Music", label: "Art and Music" },
 ];
-const defaultOption = activityOptions[0];
 
 export default function Home() {
   const [destination, setDestination] = useState("")
@@ -32,12 +33,17 @@ export default function Home() {
   const [budget, setBudget] = useState(0)
   const [interest, setInterest] = useState([])
   const [sideNote, setSideNote] = useState(" ")
-  const [plan, setPlan] = useState("Select the options to your left and let us know any specefics we may need to know in the input below...")
+  const [loading, setLoading] = useState(false)
+  const [plan, setPlan] = useState()
+
   const makePlans = async () => {
-    const json = await ky.post('https://example.com', { json: { destination, activity, startDate, endDate, budget, interest, sideNote } }).json();
-    console.log(json)
-    setPlan()
+    setLoading(true)
+    const response = await axios.post("/api/hello", { destination, activity, startDate, endDate, budget, interest, sideNote }) // body data type must match "Content-Type" header; // parses JSON response into native JavaScript objects
+    setLoading(false)
+    const data = JSON.parse(response.data.data).itinerary
+    setPlan(data)
   }
+
   return (
     <>
       <Head>
@@ -47,8 +53,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-        <div className='flex flex-row h-[100vh] w-[100vw]'>
-          <div className='flex flex-col justify-between h-[100vh]'>
+        {!loading ? (<div className='flex flex-row h-[100vh] w-[100vw]'>
+          <div className='flex flex-col justify-between h-[100vh] max-w-[40%]'>
             <ul className="space-y-2">
               <li>
                 <a href="#"
@@ -67,38 +73,57 @@ export default function Home() {
               </li>
               <li>
                 <span className="flex-1 whitespace-nowrap">Budget</span>
-
                 <input type="text" onChange={(e) => { setBudget(e.target.value) }} name="price" id="price" class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
+              </li>
+              <li>
+                <span className="flex-1 whitespace-nowrap">Destination</span>
+                <input type="text" onChange={(e) => { setDestination(e.target.value) }} name="price" id="price" class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
               </li>
               <li>
                 <span className="flex-1 whitespace-nowrap">Interest</span>
                 <Select isMulti={true} options={InterestOptions} onChange={(e) => {
                   setInterest([])
-                  e.map((interest) => {
-                    setInterest([...interest, interest.value])
+                  e.map((i) => {
+                    if (interest.length > 0) {
+                      setInterest([...interest, i.value])
+                    } else {
+                      setInterest([i.value])
+                    }
+                    console.log(interest)
                   }
                   )
                 }} placeholder="Select options" />
               </li>
               <li>
-                <span className="flex-1 whitespace-nowrap">Kanban</span>
-                <Select options={activityOptions} onChange={(e) => { console.log(e) }} placeholder="Select option" />
+                <DatePickerComp title="Start Date" date={startDate} dateSet={setStartDate} />
+              </li>
+              <li>
+                <DatePickerComp title="End Date" date={endDate} dateSet={setEndDate} />
               </li>
             </ul>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-6">
+            <button onClick={makePlans} class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-6">
               Start Plan
             </button>
           </div>
           <div className="flex flex-col flex-grow w-full bg-white shadow-xl rounded-lg overflow-hidden">
             <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
-              {plan}
+              {!plan ? <div>"Select the options to your left and let us know any specefics we may need to know in the input below..."</div> : plan.map((i) => (
+                <div>
+                  <span>Day:{i.day}</span>
+                  <br />
+                  <br />
+                  <p>Activity:{i.activity}</p>
+                  <br />
+                  <br />
+                  <br />
+                </div>
+              ))}
             </div>
-
             <div className="bg-gray-300 p-4">
               <input onChange={(e) => { setSideNote(e.target.value) }} className="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type any specefics we may need to know before creating your plans..." />
             </div>
           </div>
-        </div>
+        </div>) : <div>Loading</div>}
       </main>
     </>
   )
