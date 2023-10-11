@@ -8,11 +8,11 @@ import toast, { Toaster } from 'react-hot-toast';
 import PlanCard from 'components/components/card';
 
 export default function Home() {
-  const [destination, setDestination] = useState("")
+  const [destination, setDestination] = useState()
   const [activity, setActivity] = useState("")
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
-  const [budget, setBudget] = useState(0)
+  const [budget, setBudget] = useState()
   const [interest, setInterest] = useState([])
   const [sideNote, setSideNote] = useState(" ")
   const [loading, setLoading] = useState(false)

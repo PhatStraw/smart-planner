@@ -9,6 +9,16 @@ const openai = new OpenAI({
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
+    const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
+
+    // Check if all required parameters are present in req.body
+    const missingParams = requiredParams.filter(param => !(param in req.body));
+
+    if (missingParams.length > 0) {
+      res.status(400).json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
+      return;
+    }
+
     const response = await openai.predict(
     `Act as a specialized travel planner. Utilize the provided trip details to craft a meticulously designed itinerary. 
      Your response should feature daily activities, ensuring a rich experience. 
@@ -39,7 +49,6 @@ export default async function handler(req, res) {
      if any of the steps above is missing information send a repsonse in the same format but add the error to the activity value.
     `);
     const data = response
-    console.log(data)
     res.status(200).json({ data })
   } else {
     res.status(405).json({ error: 'Method not allowed' });
