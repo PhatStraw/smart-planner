@@ -79,7 +79,7 @@ export default function Home() {
          <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
              {!loading ? (<div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
               {!plan ? <div>Select the options to your left and let us know any specefics we may need to know in the input below...</div> : plan.map((i) => (
-                <PlanCard day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number}/>
+                <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number}/>
               ))}
             </div>) : (
             <div className='flex flex-col justify-center items-center max-w-[60%] h-[95%]'>
