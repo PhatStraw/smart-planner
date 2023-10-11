@@ -11,15 +11,21 @@ export default function PlanCard(props) {
                     <div className="text-gray-900 font-bold text-xl">{props.title}</div>
                 </div>
                 <ul className="list-disc">
-                    {props.description?.map((i)=>(
-                        <li className="text-gray-700 text-base ml-5 m-2">{i}</li>
+                    {props.description?.map((i,index)=>(
+                        <li key={index} className="text-gray-700 text-base ml-5 m-2">{i}</li>
                     ))}
                 </ul>
                 <div className="flex items-center">
                     <div className="text-sm">
-                        <p className="text-gray-900 leading-none pb-1">{props.contact}</p>
-                        <p className="text-gray-600 pb-1">{props.number}</p>
-                        <p className="text-gray-600">{props.cost}</p>
+                        <div className="flex">
+                        {props.contact.map((i)=>(
+                            <div className="m-1 pl-1" key={i.name}>
+                                <p className="text-gray-900 leading-none pb-1">{i.name}</p>
+                                <p className="text-gray-600 pb-1">{i.number}</p>
+                            </div>
+                        ))}
+                        </div>
+                        <p className="text-gray-600 pl-2">{props.cost}</p>
                     </div>
                 </div>
             </div>

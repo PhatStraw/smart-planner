@@ -4,7 +4,8 @@ import { OpenAI } from 'langchain/llms/openai';
 const openai = new OpenAI({
   openAIApiKey: process.env.NEXT_OPENAI_API,
   maxTokens: 3097,
-  tiktokenModelName: "gpt-4"// defaults to process.env["OPENAI_API_KEY"]
+  tiktokenModelName: "gpt-4",
+  temperature: 0// defaults to process.env["OPENAI_API_KEY"]
 });
 
 export default async function handler(req, res) {
@@ -31,10 +32,8 @@ export default async function handler(req, res) {
         "day": 1, 
         "title: "title representing the activities for the day", 
         "description": ["first activity description","second activity description","third activity description"], 
-        "image": "valid img url of a place mentioned in the description. Must be usable in a HTML img tag.", 
         "cost": "description of the cost breakdown for the day. at the bare minimum add a estimate.",
-        "contact": "name of place",
-        "number": "string representation of the phone number"
+        "contact": [{"name": "name of place", "number": "phone number to place"},{"name": "name of place", "number": "phone number to place"},{"name": "name of place", "number": "phone number to place"}]
       }]}. 
       This is an example use your knowlege of JSON to ensure your response is valid. make sure each activity gets it own description sting in the description array.
      Respond solely in JSON format, refraining from additional commentary.
