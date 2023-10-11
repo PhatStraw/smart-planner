@@ -64,7 +64,7 @@ export default function Home() {
       <main className="">
         <Nav />
         <Toaster />
-        <div className='flex flex-row h-[92vh] w-[100vw]'>
+        <div className='flex flex-row h-[93vh] w-[100vw]'>
           <SideBar
             makePlans={makePlans}
             setActivity={setActivity}

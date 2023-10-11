@@ -12,7 +12,7 @@ export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
     <header className="bg-cyan-500">
-      <nav className=" flex w-full items-center justify-between p-2 lg:px-8" aria-label="Global">
+      <nav className=" flex w-full items-center justify-between p-1 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="">
             <Image className="h-16 w-auto" src={Logo} alt="" />
