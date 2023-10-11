@@ -12,7 +12,6 @@ export default function PlanCard(props) {
                     <p className="text-gray-700 text-base">{props.description}</p>
                 </div>
                 <div className="flex items-center">
-                    {/* <Image className="w-10 h-10 rounded-full mr-4" src={props.image} alt="Avatar of Jonathan Reinink" /> */}
                     <div className="text-sm">
                         <p className="text-gray-900 leading-none pb-1">{props.contact}</p>
                         <p className="text-gray-600 pb-1">{props.number}</p>
