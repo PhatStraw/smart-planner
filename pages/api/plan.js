@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         "day": 1, 
         "title: "title representing the activities for the day", 
         "description": "description of the day. Include details of times, names of places etc.", 
-        "image": "img url of a place mentioned in the description.", 
+        "image": "valid img url of a place mentioned in the description. Must be usable in a HTML img tag.", 
         "cost": "description of the cost breakdown for the day. at the bare minimum add a estimate.",
         "contact": "name of place",
         "number": "string representation of the phone number"
