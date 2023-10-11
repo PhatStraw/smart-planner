@@ -34,6 +34,7 @@ export default function Home() {
         setLoading(false);
         const data = JSON.parse(response.data).itinerary;
         setPlan(data);
+        setDestination()
         resolve();  // Resolving the promise if everything goes well
       } catch (error) {
         setLoading(false);
@@ -77,7 +78,8 @@ export default function Home() {
             interest={interest}
           />
           <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
-            {!loading ? (<div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
+            {!loading ? (
+            <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
               {!plan ? (
                 <div className='flex flex-col w-full'>
                   <h1 className='text-center text-xl'>
@@ -90,7 +92,7 @@ export default function Home() {
                 <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
               ))}
             </div>) : (
-              <div className='flex flex-col justify-center items-center max-w-[60%] h-[90%]'>
+              <div className='flex flex-col justify-center items-center max-w-[60%] h-[93%]'>
                 <div className='w-[50%] h-[50%] flex flex-col justify-center items-center'>
                   <h2 className='text-4xl'>Loading</h2>
                   <Loader type="balls" color="black" />

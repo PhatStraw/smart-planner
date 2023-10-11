@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
     const response = await openai.predict(
     `Act as a specialized travel planner. Utilize the provided trip details to craft a meticulously designed itinerary. 
-     Your response should feature daily activities, ensuring a rich experience. 
+     Your response should feature daily activities, ensuring a rich experience each day of activites should last until 11pm local time. 
      Include specific names of venues, establishments, and attractions. 
      Each day should comprise at least two distinct activities if applicable with reccomendations to specefic places with phone number and any other information needed to make a reservation and explain why these places are worth visiting. 
      Ascertain the validity of your response as a JSON object with no extraneous whitespace or newline characters. 
@@ -30,12 +30,13 @@ export default async function handler(req, res) {
       {
         "day": 1, 
         "title: "title representing the activities for the day", 
-        "description": "description of the day. Include details of times, names of places etc.", 
+        "description": ["first activity description","second activity description","third activity description"], 
         "image": "valid img url of a place mentioned in the description. Must be usable in a HTML img tag.", 
         "cost": "description of the cost breakdown for the day. at the bare minimum add a estimate.",
         "contact": "name of place",
         "number": "string representation of the phone number"
       }]}. 
+      This is an example use your knowlege of JSON to ensure your response is valid. make sure each activity gets it own description sting in the description array.
      Respond solely in JSON format, refraining from additional commentary.
     
      Here are the trip details: 
@@ -49,6 +50,7 @@ export default async function handler(req, res) {
      if any of the steps above is missing information send a repsonse in the same format but add the error to the activity value.
     `);
     const data = response
+    console.log(data)
     res.status(200).json({ data })
   } else {
     res.status(405).json({ error: 'Method not allowed' });
