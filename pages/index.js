@@ -34,10 +34,10 @@ export default function Home() {
         setLoading(false);
         const data = JSON.parse(response.data).itinerary;
         setPlan(data);
-        setDestination()
         resolve();  // Resolving the promise if everything goes well
       } catch (error) {
         setLoading(false);
+        console.log(error)
         reject(error);  // Rejecting the promise if there's an error
       }
     });
@@ -79,7 +79,7 @@ export default function Home() {
           />
           <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
             {!loading ? (
-            <div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
+            <div className="w-full flex flex-col flex-grow h-0   overflow-auto">
               {!plan ? (
                 <div className='flex flex-col w-full'>
                   <h1 className='text-center text-xl'>

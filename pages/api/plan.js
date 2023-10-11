@@ -21,32 +21,31 @@ export default async function handler(req, res) {
     }
 
     const response = await openai.predict(
-    `Act as a specialized travel planner. Utilize the provided trip details to craft a meticulously designed itinerary. 
-     Your response should feature daily activities, ensuring a rich experience each day of activites should last until 11pm local time. 
-     Include specific names of venues, establishments, and attractions. 
-     Each day should comprise at least two distinct activities if applicable with reccomendations to specefic places with phone number and any other information needed to make a reservation and explain why these places are worth visiting. 
-     Ascertain the validity of your response as a JSON object with no extraneous whitespace or newline characters. 
-     Adhere to the following format: 
-     {"itinerary": [
-      {
-        "day": 1, 
-        "title: "title representing the activities for the day", 
-        "description": ["first activity description","second activity description","third activity description"], 
-        "cost": "description of the cost breakdown for the day. at the bare minimum add a estimate.",
-        "contact": [{"name": "name of place", "number": "phone number to place"},{"name": "name of place", "number": "phone number to place"},{"name": "name of place", "number": "phone number to place"}]
-      }]}. 
-      This is an example use your knowlege of JSON to ensure your response is valid. make sure each activity gets it own description sting in the description array.
-     Respond solely in JSON format, refraining from additional commentary.
-    
-     Here are the trip details: 
-     1. Plan a journey to ${req.body.destination} 
-     2. within a budget of ${req.body.budget} 
-     3. Tailor the experience to a ${req.body.activity} level of activity 
-     4. emphasizing ${req.body.interest} 
-     5. The travel period spans from ${req.body.startDate} to ${req.body.endDate} 
-     6. Incorporate the following note: ${req.body.sideNote}
+    `
+      You are a specialized travel planner. Generate an itinerary for a trip based on the provided details. Your response should be in JSON format as follows:
 
-     if any of the steps above is missing information send a repsonse in the same format but add the error to the activity value.
+      {
+        "itinerary": [
+          {
+            "day": 1, 
+            "title": "title representing the activities for the day",
+            "description": ["first activity description","second activity description"],
+            "cost": "description of the cost breakdown for the day, at least an estimate.",
+            "contact": [{"name": "name of place", "number": "phone number"}]
+          }
+        ]
+      }
+
+      Now, here are the trip details:
+
+      - Destination: ${req.body.destination}
+      - Budget: ${req.body.budget}
+      - Activity Level: ${req.body.activity}
+      - Emphasis on: ${req.body.interest}
+      - Travel Dates: ${req.body.startDate} to ${req.body.endDate}
+      - Note: ${req.body.sideNote}
+
+      Each day should comprise at least two activities, last until 11pm, and include specific names, phone numbers, and reasons for visiting. If any information is missing, use the same format but include the error in the 'description' field.
     `);
     const data = response
     console.log(data)
