@@ -5,6 +5,7 @@ import Loader from 'components/components/loader';
 import Nav from 'components/components/nav';
 import SideBar from 'components/components/sidebar';
 import toast, { Toaster } from 'react-hot-toast';
+import PlanCard from 'components/components/card';
 
 export default function Home() {
   const [destination, setDestination] = useState("")
@@ -22,8 +23,8 @@ export default function Home() {
     const planPromise = new Promise(async (resolve, reject) => {
       try {
         setLoading(true);
-        const response = await ky.post("/api/hello", {
-          timeout: 30000,
+        const response = await ky.post("/api/plan", {
+          timeout: 60000,
           json: {
             destination, activity, startDate, endDate,
             budget, interest, sideNote
@@ -50,7 +51,6 @@ export default function Home() {
       }
     );
   };
-  
 
   return (
     <>
@@ -76,18 +76,10 @@ export default function Home() {
           setInterest={setInterest}
           interest={interest}
           />
-         <div className="flex flex-col flex-grow w-full bg-white shadow-xl rounded-lg overflow-hidden">
+         <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
              {!loading ? (<div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
               {!plan ? <div>Select the options to your left and let us know any specefics we may need to know in the input below...</div> : plan.map((i) => (
-                <div key={i.day}>
-                  <span>Day:{i.day}</span>
-                  <br />
-                  <p>Activity:{i.activity}</p>
-                  <br />
-                  <p>Cost Breakdown:{i.cost}</p>
-                  <br />
-                  <br />
-                </div>
+                <PlanCard day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number}/>
               ))}
             </div>) : (
             <div className='flex flex-col justify-center items-center max-w-[60%] h-[95%]'>
@@ -96,7 +88,7 @@ export default function Home() {
               <Loader type="balls" color="black"/>
               </div>
             </div>)}
-            <div className="bg-gray-300 p-4">
+            <div className="bg-gray-300 p-4 w-full">
               <input onChange={(e) => { setSideNote(e.target.value) }} className="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type any specefics we may need to know before creating your plans..." />
             </div>
           </div>

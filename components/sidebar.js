@@ -42,11 +42,11 @@ export default function SideBar(props) {
       </li>
       <li>
         <span className="flex-1 whitespace-nowrap">Budget</span>
-        <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" class="block w-full rounded-md border-0 py-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
+        <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
       </li>
       <li>
         <span className="flex-1 whitespace-nowrap">Destination</span>
-        <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" class="block w-full rounded-md border-0 py-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
+        <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
       </li>
       <li>
         <span className="flex-1 whitespace-nowrap">Interest</span>
@@ -70,7 +70,7 @@ export default function SideBar(props) {
         <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
       </li>
     </ul>
-    <button onClick={props.makePlans} class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold p-6">
+    <button onClick={props.makePlans} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold p-6">
       Start Plan
     </button>
   </div>
