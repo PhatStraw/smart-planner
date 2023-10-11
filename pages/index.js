@@ -63,7 +63,7 @@ export default function Home() {
       <main className="">
         <Nav />
         <Toaster />
-        <div className='flex flex-row h-[90vh] w-[100vw]'>
+        <div className='flex flex-row h-[91vh] w-[100vw]'>
           <SideBar
             makePlans={makePlans}
             setActivity={setActivity}
@@ -78,7 +78,15 @@ export default function Home() {
           />
           <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
             {!loading ? (<div className="flex flex-col flex-grow h-0 p-4 overflow-auto">
-              {!plan ? <div>Select the options to your left and let us know any specefics we may need to know in the input below...</div> : plan.map((i) => (
+              {!plan ? (
+                <div className='flex flex-col w-full'>
+                  <h1 className='text-center text-xl'>
+                    Welcome To Smart Travel The AI Travel Planner!
+                  </h1>
+                  <br></br>
+                  <div className='text-center'>Select the options to your left and let us know any specefics we may need to know in the input below...</div>
+                </div>
+              ) : plan.map((i) => (
                 <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
               ))}
             </div>) : (
