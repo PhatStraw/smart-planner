@@ -4,19 +4,18 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
-import Logo from '../public/thirteen.svg'
+import Logo from '../public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
-    <header className="bg-emerald-500">
-      <nav className=" flex w-full items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header className="bg-cyan-500">
+      <nav className=" flex w-full items-center justify-between p-3 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Natty Labs</span>
-            <Image className="h-8 w-auto" src={Logo} alt="" />
+          <Link href="/" className="">
+            <Image className="h-16 w-auto" src={Logo} alt="" />
           </Link>
         </div>
         <div className="flex lg:hidden" onClick={(e)=>{}}>

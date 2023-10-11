@@ -26,27 +26,16 @@ export default function SideBar(props) {
     <div className='flex flex-col justify-between h-[100%] max-w-[40%]'>
     <ul className="space-y-4 m-2">
       <li>
-        <a href="#"
-          className="flex items-center p-2 text-base font-normal text-black rounded-lg  hover:bg-gray-100 ">
-          <svg className="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-black"
-            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-          </svg>
-          <span className="ml-3">Plan a trip</span>
-        </a>
-      </li>
-      <li>
         <span className="flex-1 whitespace-nowrap">Activity</span>
-        <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="Select option" />
+        <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="option" />
       </li>
       <li>
         <span className="flex-1 whitespace-nowrap">Budget</span>
-        <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
+        <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
       </li>
       <li>
         <span className="flex-1 whitespace-nowrap">Destination</span>
-        <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
+        <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
       </li>
       <li>
         <span className="flex-1 whitespace-nowrap">Interest</span>
@@ -61,7 +50,7 @@ export default function SideBar(props) {
             console.log(props.interest)
           }
           )
-        }} placeholder="Select options" />
+        }} placeholder="options" />
       </li>
       <li>
         <DatePickerComp title="Start Date" date={props.startDate} dateSet={props.setStartDate} />
@@ -70,7 +59,7 @@ export default function SideBar(props) {
         <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
       </li>
     </ul>
-    <button onClick={props.makePlans} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold p-6">
+    <button onClick={props.makePlans} className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold p-6">
       Start Plan
     </button>
   </div>
