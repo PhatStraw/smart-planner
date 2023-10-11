@@ -30,7 +30,7 @@ export default function Home() {
             budget, interest, sideNote
           }
         }).json();
-
+        console.log(response)
         setLoading(false);
         const data = JSON.parse(response.data).itinerary;
         setPlan(data);

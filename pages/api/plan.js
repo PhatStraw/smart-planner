@@ -1,26 +1,22 @@
-require('dotenv').config()
-import { OpenAI } from 'langchain/llms/openai';
+import { openAiExtract } from '../../utils/OpenAIExtract.js';
+export const config = {
+  runtime: "edge",
+};
 
-const openai = new OpenAI({
-  openAIApiKey: process.env.NEXT_OPENAI_API,
-  maxTokens: 3097,
-  tiktokenModelName: "gpt-4",
-  temperature: 0// defaults to process.env["OPENAI_API_KEY"]
-});
-
-export default async function handler(req, res) {
+export default async function handler(req) {
+  const body = await req.json()
+  console.log(body)
   if (req.method === 'POST') {
     const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
 
-    // Check if all required parameters are present in req.body
-    const missingParams = requiredParams.filter(param => !(param in req.body));
+    // Check if all required parameters are present in body
+    const missingParams = requiredParams.filter(param => !(param in body));
 
     if (missingParams.length > 0) {
-      res.status(400).json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
-      return;
+      return Response.json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
     }
     try {
-      const response = await openai.predict(
+      const response = await openAiExtract.predict(
         `
         You are a specialized travel planner. Generate an itinerary for a trip based on the provided details. Your response should be in JSON format as follows:
 
@@ -38,23 +34,23 @@ export default async function handler(req, res) {
 
         Now, here are the trip details:
 
-        - Destination: ${req.body.destination}
-        - Budget: ${req.body.budget}
-        - Activity Level: ${req.body.activity}
-        - Emphasis on: ${req.body.interest}
-        - Travel Dates: ${req.body.startDate} to ${req.body.endDate}
-        - Note: ${req.body.sideNote}
+        - Destination: ${body.destination}
+        - Budget: ${body.budget}
+        - Activity Level: ${body.activity}
+        - Emphasis on: ${body.interest}
+        - Travel Dates: ${body.startDate} to ${body.endDate}
+        - Note: ${body.sideNote}
 
         Each day should comprise at least two activities, last until 11pm, and include specific names, phone numbers, and reasons for visiting. If any information is missing, use the same format but include the error in the 'description' field.
       `);
       const data = response
       console.log(data)
-      res.status(200).json({ data })
+      return Response.json({ data })
 
     } catch (error) {
-      res.status(400).json({ error });
+      return Response.json({ error });
     }
   } else {
-    res.status(405).json({ error: 'Method not allowed' });
+    return Response.json({ error: 'Method not allowed' });
   }
 }
