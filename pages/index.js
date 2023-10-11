@@ -59,12 +59,12 @@ export default function Home() {
         <title>Insta Plan</title>
         <meta name="description" content="Insta Plan the instant travel palnner!" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.ico" />
       </Head>
       <main className="">
         <Nav />
         <Toaster />
-        <div className='flex flex-row h-[91vh] w-[100vw]'>
+        <div className='flex flex-row h-[92vh] w-[100vw]'>
           <SideBar
             makePlans={makePlans}
             setActivity={setActivity}
