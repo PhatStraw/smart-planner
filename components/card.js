@@ -1,6 +1,6 @@
 export default function PlanCard(props) {
     return (
-        <div className="w-full h-full rounded border-2 border-gray-300 overflow-y-auto m-1">
+        <div className="w-full h-full rounded m-1 overflow-y-auto">
             <div className="border w-full border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-slate-100 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div className="mb-2">
                     <p className="text-sm text-gray-600 flex items-center">
