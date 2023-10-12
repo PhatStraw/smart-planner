@@ -23,23 +23,23 @@ const InterestOptions = [
 ];
 export default function SideBar(props) {
   return (
-    <div className='flex flex-col bg-[#e63462] justify-between h-[100%] max-w-[40%] border-[#e63462]'>
+    <div className='flex flex-col bg-[#e63462] justify-between pb-1 md:pb-0 h-full max-w-[40%] border-[#e63462]'>
       <div className='mx-1 md:mx-2 bg-[#1e2019] h-full rounded'>
-        <h2 className='text-2xl text-slate-100 w-full text-center mt-1 border-b border-b-4 border-b-[#e63462]'>Plan a trip</h2>
+        <h2 className='md:text-2xl text-slate-100 text-center mt-1 border-b border-b-4 border-b-[#e63462]'>Plan a trip</h2>
         <ul className="text-slate space-y-4 m-4">
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <span className="text-slate-100 flex-1 slate-100space-nowrap">Activity</span>
             <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="option" />
           </li>
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <span className="text-slate-100 flex-1 slate-100space-nowrap">Budget</span>
             <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
           </li>
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <span className="text-slate-100 flex-1 slate-100space-nowrap">Destination</span>
             <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
           </li>
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <span className="text-slate-100 flex-1 slate-100space-nowrap">Interest</span>
             <Select isMulti={true} options={InterestOptions} onChange={(e) => {
               props.setInterest([])
@@ -54,19 +54,19 @@ export default function SideBar(props) {
               )
             }} placeholder="options" />
           </li>
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <DatePickerComp title="Start Date" date={props.startDate} dateSet={props.setStartDate} />
           </li>
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
           </li>
-          <li className='pb-2'>
+          <li className='md:pb-2'>
             <label for="message" class="block mb-2 text-md font-medium text-slate-100 dark:text-slate-100">Details</label>
             <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-100 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
           </li>
         </ul>
       </div>
-      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold m-1 md:m-2 p-4 md:text-xl lg:text-2xl">
+      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold m-1 md:m-2 p-4 text-md md:text-2xl">
         Start
       </button>
     </div>
