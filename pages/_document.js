@@ -5,6 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
+        <h3 className='w-full text-center text-5xl md:hidden'>Smart Travel</h3>
         <Main />
         <NextScript />
       </body>

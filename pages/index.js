@@ -17,6 +17,36 @@ function Home() {
   const [sideNote, setSideNote] = useState(" ")
   const [loading, setLoading] = useState(false)
   const [plan, setPlan] = useState()
+  const [welcome, setWelcome] = useState()
+
+  useEffect(() => {
+    const welcomeFetcher = new Promise(async (resolve, reject) => {
+      try {
+        setLoading(true);
+        const response = await ky.get("/api/welcome", {
+          timeout: 60000
+        }).json();
+        console.log(response)
+        setLoading(false);
+        const data = JSON.parse(response.data).itinerary;
+        setWelcome(data);
+        resolve();  // Resolving the promise if everything goes well
+      } catch (error) {
+        setLoading(false);
+        console.log(error)  // Rejecting the promise if there's an error
+        reject(error);  // Rejecting the promise if there's an error
+      }
+    });
+    // Passing the promise to toast.promise
+    toast.promise(
+      welcomeFetcher,
+      {
+        loading: 'Loading can take up to 30 seconds...',
+        success: <b>Done!</b>,
+        error: <b>Could not Load. Please refresh the page.</b>,
+      }
+    );
+  }, [])
 
   const makePlans = () => {
     // Wrapping the async operation in a promise
@@ -77,30 +107,29 @@ function Home() {
             {!loading ? (
               <div className="w-full flex flex-col flex-grow  overflow-auto mb-2 text-white">
                 {!plan ? (
-                  <div className='flex flex-col justify-center h-full w-full text-white'>
-                    <h1 className='text-center text-xl lg:text-2xl'>
-                      Welcome To Smart Travel: The AI Travel Planner!
-                    </h1>
-                    <br></br>
-                    <div className='text-center  text-xl lg:text-xl'>Select the options to your left...</div>
-                  </div>
+                  <>
+                    {!welcome ? (<div className='flex flex-col justify-center h-full w-full text-white'>
+                      <h1 className='text-center text-xl lg:text-2xl'>
+                        Welcome To Smart Travel: The AI Travel Planner!
+                      </h1>
+                      <br></br>
+                      <div className='text-center  text-xl lg:text-xl'>Select the options to your left...</div>
+                    </div>) : (
+                      welcome.map((i) => (
+                        <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
+                      ))
+                    )}
+                  </>
                 ) : plan.map((i) => (
                   <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
                 ))}
               </div>) : (
-              <div className='flex flex-col justify-center items-center max-w-[60%] h-[93%]'>
-                <div className='w-[50%] h-[50%] flex flex-col justify-center items-center'>
-                  <h2 className='text-4xl'>Loading</h2>
-                  <Loader type="balls" color="black" />
-                </div>
-              </div>)}
+              <Loader type="balls" color="black" />
+            )}
           </div>
         </div>
       </div>
     </div>
-
-
-
   );
 }
 
