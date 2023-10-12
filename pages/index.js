@@ -5,7 +5,7 @@ import Nav from 'components/components/nav';
 import SideBar from 'components/components/sidebar';
 import toast, { Toaster } from 'react-hot-toast';
 import PlanCard from 'components/components/card';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 function Home() {
   const [destination, setDestination] = useState()
@@ -30,11 +30,11 @@ function Home() {
         setLoading(false);
         const data = JSON.parse(response.data).itinerary;
         setWelcome(data);
-        resolve();  // Resolving the promise if everything goes well
+        return resolve();  // Resolving the promise if everything goes well
       } catch (error) {
         setLoading(false);
         console.log(error)  // Rejecting the promise if there's an error
-        reject(error);  // Rejecting the promise if there's an error
+        return reject(error);  // Rejecting the promise if there's an error
       }
     });
     // Passing the promise to toast.promise
@@ -103,6 +103,7 @@ function Home() {
       {/* <!-- Sidebar ends -->*/}
       <div className="container mx-auto py-10 h-[100vh] md:w-4/5 w-11/12">
         <div className="w-full h-[100%] rounded">
+        <h3 className='w-full text-center text-5xl md:hidden'>Smart Travel</h3>
           <div className="container mx-auto py-10 h-full md:w-4/5 w-11/12 px-6 overflow-hidden overflow-y-auto">
             {!loading ? (
               <div className="w-full flex flex-col flex-grow  overflow-auto mb-2 text-white">

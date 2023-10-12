@@ -65,7 +65,7 @@ export default function Nav(props) {
           </li>
         </ul>
       </div>
-      <button onClick={props.makePlans} className="bg-[#3b60e4] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold m-1 md:m-3 p-4 text-md md:text-2xl">
+      <button onClick={props.makePlans} className="bg-[#3b60e4] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold my-3 md:my-4 p-4 text-md md:text-2xl">
         Start
       </button>
     </div>
