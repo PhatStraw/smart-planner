@@ -78,7 +78,7 @@ export default function SideBar(props) {
         <button aria-label="Close sidebar" id="closeSideBar" className="hidden h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr roundedr justify-center cursor-pointer text-white" onClick={() => sidebarHandler(false)}>
           <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg8.svg" alt="cross" />
         </button>
-        <div className="px-8">
+        <div className="px-8 bg-[#1e2019]">
           <div className="h-16 w-full flex items-center justify-center text-center">
             <Image src={Logo} height={80} alt="Logo" />
           </div>
@@ -96,7 +96,7 @@ export default function SideBar(props) {
             setSideNote={props.setSideNote}
           />
         </div>
-        <div className="px-8 border-t mt-30 border-gray-700">
+        <div className="px-8 border-t mt-30 border-gray-700 bg-[#1e2019]">
           <ul className="w-full flex items-center justify-between bg-[#1e2019]">
             <li className="cursor-pointer text-white pt-5 pb-3">
               <button aria-label="show notifications" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
