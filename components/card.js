@@ -15,7 +15,7 @@ export default function PlanCard(props) {
                 </ul>
                 <div className="flex items-center">
                     <div className="text-sm">
-                        <div className="flex">
+                        <div className="flex flex-wrap">
                         {props.contact.map((i)=>(
                             <div className="m-1 pl-1" key={i.name}>
                                 <p className="text-gray-900 leading-none pb-1">{i.name}</p>

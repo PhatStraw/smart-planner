@@ -76,10 +76,11 @@ export default function Home() {
             setBudget={setBudget}
             setInterest={setInterest}
             interest={interest}
+            setSideNote={setSideNote}
           />
           <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
             {!loading ? (
-            <div className="w-full flex flex-col flex-grow h-0   overflow-auto">
+            <div className="w-full flex flex-col flex-grow h-0 overflow-auto">
               {!plan ? (
                 <div className='flex flex-col w-full'>
                   <h1 className='text-center text-xl'>
@@ -98,9 +99,6 @@ export default function Home() {
                   <Loader type="balls" color="black" />
                 </div>
               </div>)}
-            <div className="bg-gray-300 p-4 w-full">
-              <input onChange={(e) => { setSideNote(e.target.value) }} className="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type any specefics we may need to know before creating your plans..." />
-            </div>
           </div>
         </div>
       </main>
