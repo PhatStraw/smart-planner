@@ -61,7 +61,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.ico" />
       </Head>
-      <main className="">
+      <main className="border border-[#e63462]">
         <Nav />
         <Toaster />
         <div className='flex flex-row h-[93vh] w-[100vw]'>
@@ -78,9 +78,9 @@ export default function Home() {
             interest={interest}
             setSideNote={setSideNote}
           />
-          <div className="flex flex-col items-center w-full bg-slate shadow-xl overflow-hidden">
+          <div className="flex flex-col items-center w-full bg-[#e63462] shadow-xl overflow-hidden">
             {!loading ? (
-            <div className="w-full flex flex-col flex-grow h-0 overflow-auto bg-[#1e2019] text-white">
+            <div className="w-full flex flex-col flex-grow h-0 overflow-auto bg-[#1e2019] mb-2 text-white">
               {!plan ? (
                 <div className='flex flex-col justify-center h-full w-full bg-[#1e2019] text-white'>
                   <h1 className='text-center text-xl lg:text-2xl'>

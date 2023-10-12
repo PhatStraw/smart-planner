@@ -15,7 +15,7 @@ export default function Nav() {
       <nav className=" flex w-full items-center justify-between p-1 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="">
-            <Image className="h-16 w-auto" src={Logo} alt="" />
+            <Image className="h-14 md:h-16 w-auto" src={Logo} alt="" />
           </Link>
         </div>
         <div className="flex lg:hidden" onClick={(e)=>{}}>

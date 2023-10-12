@@ -23,8 +23,8 @@ const InterestOptions = [
 ];
 export default function SideBar(props) {
   return (
-    <div className='flex flex-col bg-[#e63462] justify-between h-[100%] max-w-[40%] border-r border-r-2 border-[#e63462]'>
-      <div className='mx-2 bg-[#1e2019] h-full rounded'>
+    <div className='flex flex-col bg-[#e63462] justify-between h-[100%] max-w-[40%] border-[#e63462]'>
+      <div className='mx-1 md:mx-2 bg-[#1e2019] h-full rounded'>
         <ul className="text-slate space-y-4 m-4">
           <li>
             <span className="text-white flex-1 whitespace-nowrap">Activity</span>
@@ -65,7 +65,7 @@ export default function SideBar(props) {
           </li>
         </ul>
       </div>
-      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-white font-bold m-2 p-4">
+      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-white font-bold m-1 md:m-2 p-4">
         Start Plan
       </button>
     </div>
