@@ -101,7 +101,7 @@ function Home() {
         setSideNote={setSideNote}
       />
       {/* <!-- Sidebar ends -->*/}
-      <div className="container mx-auto py-10 h-[100vh] md:w-4/5 w-11/12">
+      <div className="container mx-auto py-10 h-[100vh] md:w-4/5 w-11/12 overflow-hidden">
         <div className="w-full h-[100%] rounded">
         <h3 className='w-full text-center text-5xl md:hidden'>Smart Travel</h3>
           <div className="container mx-auto py-10 h-full md:w-4/5 w-11/12 px-6 overflow-hidden overflow-y-auto">
@@ -125,7 +125,7 @@ function Home() {
                   <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
                 ))}
               </div>) : (
-              <Loader type="balls" color="black" />
+              <Loader type="balls" color="white" />
             )}
           </div>
         </div>
