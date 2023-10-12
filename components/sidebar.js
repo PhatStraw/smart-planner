@@ -23,7 +23,7 @@ const InterestOptions = [
 ];
 export default function SideBar(props) {
   return (
-    <div className='flex flex-col bg-[#e63462] justify-between pb-1 md:pb-0 h-full max-w-[40%] border-[#e63462]'>
+    <div className='flex flex-col bg-[#e63462] justify-between pb-1 md:pb-0 max-w-[40%] border-[#e63462]'>
       <div className='mx-1 md:mx-2 bg-[#1e2019] h-full rounded'>
         <h2 className='md:text-2xl text-slate-100 text-center mt-1 border-b border-b-4 border-b-[#e63462]'>Plan a trip</h2>
         <ul className="text-slate space-y-4 m-4">
@@ -60,9 +60,9 @@ export default function SideBar(props) {
           <li className='md:pb-2'>
             <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
           </li>
-          <li className='md:pb-2'>
+          <li className=''>
             <label for="message" class="block mb-2 text-md font-medium text-slate-100 dark:text-slate-100">Details</label>
-            <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-100 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
+            <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-100 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
           </li>
         </ul>
       </div>
