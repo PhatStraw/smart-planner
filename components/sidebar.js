@@ -48,22 +48,22 @@ export default function SideBar(props) {
         </div>
         <div className="px-8 border-t border-gray-700">
           <ul className="w-full flex items-center justify-between bg-[#1e2019]">
-            <li className="cursor-pointer text-white pt-5 pb-3">
+            <li className="cursor-pointer text-white pt-5 ">
               <button aria-label="show notifications" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg3.svg" alt="notifications" />
               </button>
             </li>
-            <li className="cursor-pointer text-white pt-5 pb-3">
+            <li className="cursor-pointer text-white pt-5 ">
               <button aria-label="open chats" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg4.svg" alt="chat" />
               </button>
             </li>
-            <li className="cursor-pointer text-white pt-5 pb-3">
+            <li className="cursor-pointer text-white pt-5 ">
               <button aria-label="open settings" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg5.svg" alt="settings" />
               </button>
             </li>
-            <li className="cursor-pointer text-white pt-5 pb-3">
+            <li className="cursor-pointer text-white pt-5 ">
               <button aria-label="open logs" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg6.svg" alt="drawer" />
               </button>
