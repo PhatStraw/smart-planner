@@ -27,19 +27,19 @@ export default function SideBar(props) {
       <div className='mx-1 md:mx-2 bg-[#1e2019] h-full rounded'>
         <ul className="text-slate space-y-4 m-4">
           <li>
-            <span className="text-white flex-1 whitespace-nowrap">Activity</span>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Activity</span>
             <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="option" />
           </li>
           <li>
-            <span className="text-white flex-1 whitespace-nowrap">Budget</span>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Budget</span>
             <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
           </li>
           <li>
-            <span className="text-white flex-1 whitespace-nowrap">Destination</span>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Destination</span>
             <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
           </li>
           <li>
-            <span className="text-white flex-1 whitespace-nowrap">Interest</span>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Interest</span>
             <Select isMulti={true} options={InterestOptions} onChange={(e) => {
               props.setInterest([])
               e.map((i) => {
@@ -60,12 +60,12 @@ export default function SideBar(props) {
             <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
           </li>
           <li>
-            <label for="message" class="block mb-2 text-md font-medium text-white dark:text-white">Details</label>
-            <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
+            <label for="message" class="block mb-2 text-md font-medium text-slate-100 dark:text-slate-100">Details</label>
+            <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-100 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
           </li>
         </ul>
       </div>
-      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-white font-bold m-1 md:m-2 p-4">
+      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold m-1 md:m-2 p-4">
         Start Plan
       </button>
     </div>

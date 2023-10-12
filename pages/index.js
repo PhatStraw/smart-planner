@@ -80,9 +80,9 @@ export default function Home() {
           />
           <div className="flex flex-col items-center w-full bg-[#e63462] shadow-xl overflow-hidden">
             {!loading ? (
-            <div className="w-full flex flex-col flex-grow h-0 overflow-auto bg-[#1e2019] mb-2 text-white">
+            <div className="w-full flex flex-col flex-grow h-0 overflow-auto bg-[#1e2019] mb-2 text-slate-100">
               {!plan ? (
-                <div className='flex flex-col justify-center h-full w-full bg-[#1e2019] text-white'>
+                <div className='flex flex-col justify-center h-full w-full bg-[#1e2019] text-slate-100'>
                   <h1 className='text-center text-xl lg:text-2xl'>
                     Welcome To Smart Travel: The AI Travel Planner!
                   </h1>

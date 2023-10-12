@@ -1,7 +1,7 @@
 export default function PlanCard(props) {
     return (
         <div className="w-full w-full lg:flex my-1 p-2">
-            <div className="border w-full border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div className="border w-full border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-slate-100 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
                 <div className="mb-2">
                     <p className="text-sm text-gray-600 flex items-center">
                         Day {props.day}
