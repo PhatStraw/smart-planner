@@ -1,9 +1,8 @@
 import Logo from '../public/logo.png'
-
-
 import React, { useEffect } from "react";
 import Image from 'next/image';
 import Nav from './nav';
+
 export default function SideBar(props) {
   useEffect(() => {
     var sideBar = window.document.getElementById("mobile-nav");

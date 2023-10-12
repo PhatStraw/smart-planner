@@ -1,15 +1,5 @@
-import { useState } from 'react'
-import { Dialog, Popover } from '@headlessui/react'
 import Select from 'react-select';
 import DatePickerComp from 'components/components/datePicker';
-import {
-  Bars3Icon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
-import Logo from '../public/logo.png'
-import Image from 'next/image'
-import Link from 'next/link'
-
 const activityOptions = [
   { value: "low", label: "low" },
   { value: "medium", label: "medium" },
