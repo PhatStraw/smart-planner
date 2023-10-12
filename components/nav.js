@@ -11,7 +11,7 @@ import Link from 'next/link'
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   return (
-    <header className="bg-cyan-500">
+    <header className="bg-[#e63462]">
       <nav className=" flex w-full items-center justify-between p-1 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="">

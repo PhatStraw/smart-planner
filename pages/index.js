@@ -78,16 +78,16 @@ export default function Home() {
             interest={interest}
             setSideNote={setSideNote}
           />
-          <div className="flex flex-col items-center w-full bg-white shadow-xl rounded-lg overflow-hidden">
+          <div className="flex flex-col items-center w-full bg-slate shadow-xl overflow-hidden">
             {!loading ? (
-            <div className="w-full flex flex-col flex-grow h-0 overflow-auto">
+            <div className="w-full flex flex-col flex-grow h-0 overflow-auto bg-[#1e2019] text-white">
               {!plan ? (
-                <div className='flex flex-col w-full'>
-                  <h1 className='text-center text-xl'>
-                    Welcome To Smart Travel The AI Travel Planner!
+                <div className='flex flex-col justify-center h-full w-full bg-[#1e2019] text-white'>
+                  <h1 className='text-center text-xl lg:text-2xl'>
+                    Welcome To Smart Travel: The AI Travel Planner!
                   </h1>
                   <br></br>
-                  <div className='text-center'>Select the options to your left and let us know any specefics we may need to know in the input below...</div>
+                  <div className='text-center  text-xl lg:text-xl'>Select the options to your left...</div>
                 </div>
               ) : plan.map((i) => (
                 <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
