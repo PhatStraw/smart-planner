@@ -1,13 +1,13 @@
 import Head from 'next/head'
-import { useState } from 'react';
 import ky from 'ky';
 import Loader from 'components/components/loader';
 import Nav from 'components/components/nav';
 import SideBar from 'components/components/sidebar';
 import toast, { Toaster } from 'react-hot-toast';
 import PlanCard from 'components/components/card';
+import React, { useEffect, useState } from "react";
 
-export default function Home() {
+function Home() {
   const [destination, setDestination] = useState()
   const [activity, setActivity] = useState("")
   const [startDate, setStartDate] = useState("")
@@ -54,45 +54,44 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Head>
-        <title>Insta Plan</title>
-        <meta name="description" content="Insta Plan the instant travel palnner!" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/logo.ico" />
-      </Head>
-      <main className="border border-[#e63462]">
-        <Nav />
-        <Toaster />
-        <div className='flex flex-row h-[93vh] w-[100vw]'>
-          <SideBar
-            makePlans={makePlans}
-            setActivity={setActivity}
-            setDestination={setDestination}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
-            startDate={startDate}
-            endDate={endDate}
-            setBudget={setBudget}
-            setInterest={setInterest}
-            interest={interest}
-            setSideNote={setSideNote}
-          />
-          <div className="flex flex-col items-center w-full bg-[#e63462] shadow-xl overflow-hidden">
+
+    <div className="flex flex-no-wrap">
+      {/* <!-- Sidebar starts -->
+      <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] --> */}
+      <SideBar
+        makePlans={makePlans}
+        setActivity={setActivity}
+        setDestination={setDestination}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        startDate={startDate}
+        endDate={endDate}
+        setBudget={setBudget}
+        setInterest={setInterest}
+        interest={interest}
+        setSideNote={setSideNote}
+      />
+      {/* <!-- Sidebar ends -->
+      <!-- Remove class [ h-64 ] when adding a card block --> */}
+      <div className="container mx-auto py-10 h-[100vh] md:w-4/5 w-11/12">
+        {/* <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border --> */}
+        <div className="w-full h-[100%] rounded border-dashed border-2 border-gray-300">
+          {/* <!-- Place your content here --> */}
+          <div className="container mx-auto py-10 h-full md:w-4/5 w-11/12 px-6 overflow-hidden overflow-y-auto">
             {!loading ? (
-            <div className="w-full flex flex-col flex-grow h-0 overflow-auto bg-[#1e2019] mb-2 text-white">
-              {!plan ? (
-                <div className='flex flex-col justify-center h-full w-full bg-[#1e2019] text-white'>
-                  <h1 className='text-center text-xl lg:text-2xl'>
-                    Welcome To Smart Travel: The AI Travel Planner!
-                  </h1>
-                  <br></br>
-                  <div className='text-center  text-xl lg:text-xl'>Select the options to your left...</div>
-                </div>
-              ) : plan.map((i) => (
-                <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
-              ))}
-            </div>) : (
+              <div className="w-full flex flex-col flex-grow  overflow-auto mb-2 text-white">
+                {!plan ? (
+                  <div className='flex flex-col justify-center h-full w-full text-white'>
+                    <h1 className='text-center text-xl lg:text-2xl'>
+                      Welcome To Smart Travel: The AI Travel Planner!
+                    </h1>
+                    <br></br>
+                    <div className='text-center  text-xl lg:text-xl'>Select the options to your left...</div>
+                  </div>
+                ) : plan.map((i) => (
+                  <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
+                ))}
+              </div>) : (
               <div className='flex flex-col justify-center items-center max-w-[60%] h-[93%]'>
                 <div className='w-[50%] h-[50%] flex flex-col justify-center items-center'>
                   <h2 className='text-4xl'>Loading</h2>
@@ -101,7 +100,12 @@ export default function Home() {
               </div>)}
           </div>
         </div>
-      </main>
-    </>
-  )
+      </div>
+    </div>
+
+
+
+  );
 }
+
+export default Home;

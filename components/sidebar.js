@@ -1,74 +1,127 @@
-import DatePickerComp from 'components/components/datePicker';
-import Select from 'react-select';
+import Logo from '../public/logo.png'
 
-const activityOptions = [
-  { value: "low", label: "low" },
-  { value: "medium", label: "medium" },
-  { value: "high", label: "high" }
-];
 
-const InterestOptions = [
-  { value: "local culture", label: "local culture" },
-  { value: "trying new food", label: "trying new food" },
-  { value: "Adventure and Outdoor Activities", label: "Adventure and Outdoor Activities" },
-  { value: "Visiting Historical or Significant Sites", label: "Visiting Historical or Significant Sites" },
-  { value: "Relaxation and Wellness", label: "Relaxation and Wellness" },
-  { value: "Capturing Photographs", label: "Capturing Photographs" },
-  { value: "Attending Events or Festivals", label: "Attending Events or Festivals" },
-  { value: "Shopping", label: "Shopping" },
-  { value: "Meeting New People", label: "Meeting New People" },
-  { value: "Nature and Wildlife", label: "Nature and Wildlife" },
-  { value: "Sports", label: "Sports" },
-  { value: "Art and Music", label: "Art and Music" },
-];
+import React, { useEffect } from "react";
+import Image from 'next/image';
+import Nav from './nav';
 export default function SideBar(props) {
+  useEffect(() => {
+    var sideBar = window.document.getElementById("mobile-nav");
+    if (sideBar.style) {
+      sideBar.style.transform = "translateX(-260px)"
+    }
+  }, [])
+  function sidebarHandler(flag) {
+    var sideBar = window.document.getElementById("mobile-nav");
+    var openSidebar = window.document.getElementById("openSideBar");
+    var closeSidebar = window.document.getElementById("closeSideBar");
+    sideBar.style.transform = "translateX(-260px)";
+    if (flag) {
+      sideBar.style.transform = "translateX(0px)";
+      openSidebar.classList.add("hidden");
+      closeSidebar.classList.remove("hidden");
+    } else {
+      sideBar.style.transform = "translateX(-260px)";
+      closeSidebar.classList.add("hidden");
+      openSidebar.classList.remove("hidden");
+    }
+  }
   return (
-    <div className='flex flex-col bg-[#e63462] justify-between pb-1 md:pb-0 max-w-[40%] border-[#e63462]'>
-      <div className='mx-1 md:mx-2 bg-[#1e2019] h-full rounded'>
-        <h2 className='md:text-2xl text-slate-100 text-center mt-1 border-b border-b-4 border-b-[#e63462]'>Plan a trip</h2>
-        <ul className="text-slate space-y-4 m-4">
-          <li className='md:pb-2'>
-            <span className="text-slate-100 flex-1 slate-100space-nowrap">Activity</span>
-            <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="option" />
-          </li>
-          <li className='md:pb-2'>
-            <span className="text-slate-100 flex-1 slate-100space-nowrap">Budget</span>
-            <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
-          </li>
-          <li className='md:pb-2'>
-            <span className="text-slate-100 flex-1 slate-100space-nowrap">Destination</span>
-            <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
-          </li>
-          <li className='md:pb-2'>
-            <span className="text-slate-100 flex-1 slate-100space-nowrap">Interest</span>
-            <Select isMulti={true} options={InterestOptions} onChange={(e) => {
-              props.setInterest([])
-              e.map((i) => {
-                if (props.interest.length > 0) {
-                  props.setInterest([...props.interest, i.value])
-                } else {
-                  props.setInterest([i.value])
-                }
-                console.log(props.interest)
-              }
-              )
-            }} placeholder="options" />
-          </li>
-          <li className='md:pb-2'>
-            <DatePickerComp title="Start Date" date={props.startDate} dateSet={props.setStartDate} />
-          </li>
-          <li className='md:pb-2'>
-            <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
-          </li>
-          <li className=''>
-            <label for="message" class="block mb-2 text-md font-medium text-slate-100 dark:text-slate-100">Details</label>
-            <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-100 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
-          </li>
-        </ul>
+    <>
+      <div style={{ height: '100vh' }} className="w-64 absolute sm:relative bg-[#1e2019] shadow md:h-full flex-col justify-between hidden sm:flex">
+        <div className="px-8">
+          <div className="h-16 w-full flex justify-center">
+            <Image src={Logo} height={100} alt="Logo" />
+          </div>
+          <Nav
+            makePlans={props.makePlans}
+            setActivity={props.setActivity}
+            setDestination={props.setDestination}
+            setStartDate={props.setStartDate}
+            setEndDate={props.setEndDate}
+            startDate={props.startDate}
+            endDate={props.endDate}
+            setBudget={props.setBudget}
+            setInterest={props.setInterest}
+            interest={props.interest}
+            setSideNote={props.setSideNote}
+          />
+        </div>
+        <div className="px-8 border-t border-gray-700">
+          <ul className="w-full flex items-center justify-between bg-[#1e2019]">
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="show notifications" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg3.svg" alt="notifications" />
+              </button>
+            </li>
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="open chats" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg4.svg" alt="chat" />
+              </button>
+            </li>
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="open settings" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg5.svg" alt="settings" />
+              </button>
+            </li>
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="open logs" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg6.svg" alt="drawer" />
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-      <button onClick={props.makePlans} className="bg-[#1e2019] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold m-1 md:m-2 p-4 text-md md:text-2xl">
-        Start
-      </button>
-    </div>
-  )
+      <div className="w-64 z-40 absolute bg-[#1e2019] shadow h-[100%] flex-col justify-between sm:hidden transition duration-150 ease-in-out" id="mobile-nav">
+        <button aria-label="toggle sidebar" id="openSideBar" className="h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800" onClick={() => sidebarHandler(true)}>
+          <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg7.svg" alt="toggler" />
+        </button>
+        <button aria-label="Close sidebar" id="closeSideBar" className="hidden h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white" onClick={() => sidebarHandler(false)}>
+          <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg8.svg" alt="cross" />
+        </button>
+        <div className="px-8">
+          <div className="h-16 w-full flex items-center justify-center text-center">
+            <Image src={Logo} height={80} alt="Logo" />
+          </div>
+          <Nav
+            makePlans={props.makePlans}
+            setActivity={props.setActivity}
+            setDestination={props.setDestination}
+            setStartDate={props.setStartDate}
+            setEndDate={props.setEndDate}
+            startDate={props.startDate}
+            endDate={props.endDate}
+            setBudget={props.setBudget}
+            setInterest={props.setInterest}
+            interest={props.interest}
+            setSideNote={props.setSideNote}
+          />
+        </div>
+        <div className="px-8 border-t mt-30 border-gray-700">
+          <ul className="w-full flex items-center justify-between bg-[#1e2019]">
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="show notifications" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg3.svg" alt="notifications" />
+              </button>
+            </li>
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="open chats" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg4.svg" alt="chat" />
+              </button>
+            </li>
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="open settings" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg5.svg" alt="settings" />
+              </button>
+            </li>
+            <li className="cursor-pointer text-white pt-5 pb-3">
+              <button aria-label="open logs" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
+                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg6.svg" alt="drawer" />
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
+  );
 }

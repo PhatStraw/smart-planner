@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Dialog, Popover } from '@headlessui/react'
+import Select from 'react-select';
+import DatePickerComp from 'components/components/datePicker';
 import {
   Bars3Icon,
   XMarkIcon,
@@ -8,98 +10,74 @@ import Logo from '../public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Nav() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+const activityOptions = [
+  { value: "low", label: "low" },
+  { value: "medium", label: "medium" },
+  { value: "high", label: "high" }
+];
+
+const InterestOptions = [
+  { value: "local culture", label: "local culture" },
+  { value: "trying new food", label: "trying new food" },
+  { value: "Adventure and Outdoor Activities", label: "Adventure and Outdoor Activities" },
+  { value: "Visiting Historical or Significant Sites", label: "Visiting Historical or Significant Sites" },
+  { value: "Relaxation and Wellness", label: "Relaxation and Wellness" },
+  { value: "Capturing Photographs", label: "Capturing Photographs" },
+  { value: "Attending Events or Festivals", label: "Attending Events or Festivals" },
+  { value: "Shopping", label: "Shopping" },
+  { value: "Meeting New People", label: "Meeting New People" },
+  { value: "Nature and Wildlife", label: "Nature and Wildlife" },
+  { value: "Sports", label: "Sports" },
+  { value: "Art and Music", label: "Art and Music" },
+];
+export default function Nav(props) {
   return (
-    <header className="bg-[#e63462]">
-      <nav className=" flex w-full items-center justify-between p-1 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
-          <Link href="/" className="">
-            <Image className="h-14 md:h-16 w-auto" src={Logo} alt="" />
-          </Link>
-        </div>
-        <div className="flex lg:hidden" onClick={(e)=>{}}>
-          <button
-            type="button"
-            onClick={()=>setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-          >
-            <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-          </button>
-        </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <Link href="#" className="text-sm font-semibold leading-6 text-slate-100">
-            Account
-          </Link>
-          <Link href="#" className="text-sm font-semibold leading-6 text-slate-100">
-            Billing
-          </Link>
-          <Link href="#" className="text-sm font-semibold leading-6 text-slate-100">
-            Plans
-          </Link>
-        </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="#" className="text-sm font-semibold leading-6 text-slate-100">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </Link>
-        </div>
-      </nav>
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-slate-100 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
-            <Link href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Smart Travel</span>
-              <Image
-                className="h-8 w-auto"
-                src={Logo}
-                alt=""
-              />
-            </Link>
-            <button
-              type="button"
-              className="-m-2.5 rounded-md p-2.5 text-slate-100"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span className="sr-only">Close menu</span>
-              <XMarkIcon className="h-6 w-6 text-gray-500" aria-hidden="true" />
-            </button>
-          </div>
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
-                <Link
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Account
-                </Link>
-                <Link
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Billing
-                </Link>
-                <Link
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Plans
-                </Link>
-              </div>
-              <div className="py-6">
-                <Link
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
-    </header>
+    <div className='w-full flex flex-col'>
+      <div className='w-full rounded'>
+        <h2 className='md:text-2xl text-slate-100 text-center mt-1 border-b border-b-4 mb-2 border-b-[#3b60e4]'>Plan a trip</h2>
+        <ul className="text-slate w-full space-y-4">
+          <li className=''>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Activity</span>
+            <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="option" />
+          </li>
+          <li className=''>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Budget</span>
+            <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
+          </li>
+          <li className=''>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Destination</span>
+            <input type="text" onChange={(e) => { props.setDestination(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="where are you going" />
+          </li>
+          <li className=''>
+            <span className="text-slate-100 flex-1 slate-100space-nowrap">Interest</span>
+            <Select isMulti={true} options={InterestOptions} onChange={(e) => {
+              props.setInterest([])
+              e.map((i) => {
+                if (props.interest.length > 0) {
+                  props.setInterest([...props.interest, i.value])
+                } else {
+                  props.setInterest([i.value])
+                }
+                console.log(props.interest)
+              }
+              )
+            }} placeholder="options" />
+          </li>
+          <li className=''>
+            <DatePickerComp title="Start Date" date={props.startDate} dateSet={props.setStartDate} />
+          </li>
+          <li className=''>
+            <DatePickerComp title="End Date" date={props.endDate} dateSet={props.setEndDate} />
+          </li>
+          <li className=''>
+            <label for="message" class="block mb-2 text-md font-medium text-slate-100 dark:text-slate-100">Details</label>
+            <textarea onChange={(e) => { props.setSideNote(e.target.value) }} id="message" rows="3" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-100 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your trip details here..."></textarea>
+          </li>
+        </ul>
+      </div>
+      <button onClick={props.makePlans} className="bg-[#3b60e4] rounded hover:bg-[#fcf7f8] hover:text-[#1e2019] text-slate-100 font-bold m-1 md:m-3 p-4 text-md md:text-2xl">
+        Start
+      </button>
+    </div>
   )
 }
