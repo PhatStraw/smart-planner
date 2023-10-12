@@ -28,7 +28,7 @@ export default function SideBar(props) {
   return (
     <>
       <div style={{ height: '100vh' }} className="w-64 absolute sm:relative bg-[#1e2019] shadow md:h-full flex-col justify-between hidden sm:flex">
-        <div className="px-8">
+        <div className="px-8 bg-[#1e2019]">
           <div className="h-16 w-full flex justify-center">
             <Image src={Logo} height={100} alt="Logo" />
           </div>
@@ -46,7 +46,7 @@ export default function SideBar(props) {
             setSideNote={props.setSideNote}
           />
         </div>
-        <div className="px-8 border-t border-gray-700">
+        <div className="px-8 border-t border-gray-700 bg-[#1e2019]">
           <ul className="w-full flex items-center justify-between bg-[#1e2019]">
             <li className="cursor-pointer text-white pt-5 ">
               <button aria-label="show notifications" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
@@ -72,10 +72,10 @@ export default function SideBar(props) {
         </div>
       </div>
       <div className="w-64 z-40 absolute bg-[#1e2019] shadow h-[100%] flex-col justify-between sm:hidden transition duration-150 ease-in-out" id="mobile-nav">
-        <button aria-label="toggle sidebar" id="openSideBar" className="h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800" onClick={() => sidebarHandler(true)}>
+        <button aria-label="toggle sidebar" id="openSideBar" className="h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr roundedr justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 rounded focus:ring-gray-800" onClick={() => sidebarHandler(true)}>
           <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg7.svg" alt="toggler" />
         </button>
-        <button aria-label="Close sidebar" id="closeSideBar" className="hidden h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer text-white" onClick={() => sidebarHandler(false)}>
+        <button aria-label="Close sidebar" id="closeSideBar" className="hidden h-10 w-10 bg-[#1e2019] absolute right-0 mt-16 -mr-10 flex items-center shadow rounded-tr roundedr justify-center cursor-pointer text-white" onClick={() => sidebarHandler(false)}>
           <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg8.svg" alt="cross" />
         </button>
         <div className="px-8">
