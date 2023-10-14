@@ -20,8 +20,8 @@ const Button = ({
         hover:opacity-80
         transition
         w-full
-        ${outline ? 'bg-white' : 'bg-[#3b60e4]'}
-        ${outline ? 'border-black' : 'border-[#3b60e4]'}
+        ${outline ? 'bg-white' : 'bg-[#076AE0]'}
+        ${outline ? 'border-black' : 'border-[#076AE0]'}
         ${outline ? 'text-black' : 'text-white'}
         ${small ? 'text-sm' : 'text-md'}
         ${small ? 'py-1' : 'py-3'}

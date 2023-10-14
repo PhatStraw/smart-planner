@@ -5,7 +5,9 @@ import dynamic from 'next/dynamic'
 import { useCallback, useMemo, useState } from "react";
 import { formatISO } from 'date-fns';
 import { useRouter, useSearchParams } from 'next/navigation';
-
+import ky from 'ky';
+import toast, { Toaster } from 'react-hot-toast';
+import React from "react";
 import useSearchModal from "../../hooks/useSearchModal";
 
 import Modal from "./Modal";
@@ -15,6 +17,7 @@ import CountrySelect, {
     CountrySelectValue
 } from "../inputs/CountrySelect";
 import Heading from '../Heading';
+import Nav from '../nav';
 
 const STEPS = {
     LOCATION: 0,
@@ -33,12 +36,17 @@ const SearchModal = () => {
     const [guestCount, setGuestCount] = useState(1);
     const [roomCount, setRoomCount] = useState(1);
     const [bathroomCount, setBathroomCount] = useState(1);
+    const [activity, setActivity] = useState("")
+    const [budget, setBudget] = useState()
+    const [interest, setInterest] = useState([])
+    const [sideNote, setSideNote] = useState(" ")
     const [dateRange, setDateRange] = useState({
         startDate: new Date(),
         endDate: new Date(),
         key: 'selection'
     });
 
+    
     const Map = useMemo(() => dynamic(() => import('../Map'), {
         ssr: false
     }), [location]);
@@ -67,7 +75,11 @@ const SearchModal = () => {
             locationValue: location?.value,
             guestCount,
             roomCount,
-            bathroomCount
+            bathroomCount,
+            sideNote,
+            interest: interest,
+            budget,
+            activity
         };
 
         if (dateRange.startDate) {
@@ -84,6 +96,9 @@ const SearchModal = () => {
         }, { skipNull: true });
 
         setStep(STEPS.LOCATION);
+        setInterest([])
+        setActivity("")
+        setBudget()
         searchModal.onClose();
         router.push(url);
     },
@@ -91,6 +106,10 @@ const SearchModal = () => {
             step,
             searchModal,
             location,
+            budget,
+            interest,
+            activity,
+            sideNote,
             router,
             guestCount,
             roomCount,
@@ -149,34 +168,41 @@ const SearchModal = () => {
 
     if (step === STEPS.INFO) {
         bodyContent = (
-            <div className="flex flex-col gap-8">
-                <Heading
-                    title="More information"
-                    subtitle="Find your perfect place!"
-                />
-                <Counter
-                    onChange={(value) => setGuestCount(value)}
-                    value={guestCount}
-                    title="Guests"
-                    subtitle="How many guests are coming?"
-                />
-                <hr />
-                <Counter
-                    onChange={(value) => setRoomCount(value)}
-                    value={roomCount}
-                    title="Rooms"
-                    subtitle="How many rooms do you need?"
-                />
-                <hr />
-                <Counter
-                    onChange={(value) => {
-                        setBathroomCount(value)
-                    }}
-                    value={bathroomCount}
-                    title="Bathrooms"
-                    subtitle="How many bahtrooms do you need?"
-                />
-            </div>
+            // <div className="flex flex-col gap-8">
+            //     <Heading
+            //         title="More information"
+            //         subtitle="Find your perfect place!"
+            //     />
+            //     <Counter
+            //         onChange={(value) => setGuestCount(value)}
+            //         value={guestCount}
+            //         title="Guests"
+            //         subtitle="How many guests are coming?"
+            //     />
+            //     <hr />
+            //     <Counter
+            //         onChange={(value) => setRoomCount(value)}
+            //         value={roomCount}
+            //         title="Rooms"
+            //         subtitle="How many rooms do you need?"
+            //     />
+            //     <hr />
+            //     <Counter
+            //         onChange={(value) => {
+            //             setBathroomCount(value)
+            //         }}
+            //         value={bathroomCount}
+            //         title="Bathrooms"
+            //         subtitle="How many bahtrooms do you need?"
+            //     />
+            // </div>
+            <Nav
+            setActivity={setActivity}
+            setBudget={setBudget}
+            setInterest={setInterest}
+            interest={interest}
+            setSideNote={setSideNote}
+          />
         )
     }
 

@@ -2,17 +2,17 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Logoo from '../../public/logo.png'
+import Logoo from '../../public/blue.jpeg'
 const Logo = () => {
     const router = useRouter();
 
     return (
         <Image
             onClick={() => router.push('/')}
-            className="hidden md:block cursor-pointer"
+            className="hidden md:block cursor-pointer rounded"
             src={Logoo}
-            height="100"
-            width="100"
+            height="50"
+            width="50"
             alt="Logo"
         />
     );
