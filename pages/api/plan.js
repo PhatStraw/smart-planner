@@ -1,23 +1,11 @@
 import { openAiExtract } from '../../utils/OpenAIExtract.js';
+import { getPhotos } from '../../utils/UnsplashRandom.js';
 export const config = {
   runtime: "edge",
 };
 
-// Replace 'Your_Unsplash_Access_Key_Here' with your actual Unsplash Access Key
-const accessKey = process.env.NEXT_UNSPLASH_ACCESS;
-
-async function getPhotos(query) {
-  const response = await fetch(`https://api.unsplash.com/photos/random?query=${query}&client_id=${accessKey}`);
-  if (!response.ok) {
-    throw new Error('Network response was not ok ' + response.statusText);
-  }
-  const data = await response.json();
-  return data.urls.regular;
-}
-
 export default async function handler(req) {
   const body = await req.json()
-  console.log(req.method)
   if (req.method === 'POST') {
     try {
       const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
@@ -67,7 +55,7 @@ export default async function handler(req) {
       return Response.json({ data: final });
 
     } catch (error) {
-      return Response.json({ error });
+      return Response.error({ error });
     }
   } else {
     return Response.error({ error: 'Method not allowed' });

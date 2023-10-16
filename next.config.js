@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   env:{
-    OPENAI_API: process.env.OPENAI_API
+    OPENAI_API: process.env.OPENAI_API,
+    NEXT_UNSPLASH_ACCESS: process.env.NEXT_UNSPLASH_ACCESS
   }
 }
 
