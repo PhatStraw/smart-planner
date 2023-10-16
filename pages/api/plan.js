@@ -19,35 +19,36 @@ export default async function handler(req) {
   const body = await req.json()
   console.log(req.method)
   if (req.method === 'POST') {
-    const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
-
-    // Check if all required parameters are present in body
-    const missingParams = requiredParams.filter(param => !(param in body));
-
-    if (missingParams.length > 0) {
-      return Response.json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
-    }
     try {
+      const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
+  
+      // Check if all required parameters are present in body
+      const missingParams = requiredParams.filter(param => !(param in body));
+  
+      if (missingParams.length > 0) {
+        return Response.json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
+      }
+
       const response = await openAiExtract.predict(
         `
         You are a specialized travel planner. Generate multiple plans for the user to choose from this includes an itinerary for the trip based on the provided details. Your response should be in JSON format as follows:
 
-[  
-  {
-    "Option": 1,
-    "title": "Something describing the trip",
-    "total: "estimated total cost for this trip"
-    "itinerary": [
-      {
-        "day": 1, 
-        "title": "title representing the activities for the day",
-        "description": ["first activity description","second activity description"],
-        "cost": "description of the cost breakdown for the day, at least an estimate.",
-        "contact": [{"name": "name of place", "number": "phone number"}]
-      }
-    ]
-  }
-]
+          [  
+            {
+              "Option": 1,
+              "title": "Something describing the trip",
+              "total: "estimated total cost for this trip"
+              "itinerary": [
+                {
+                  "day": 1, 
+                  "title": "title representing the activities for the day",
+                  "description": ["first activity description","second activity description"],
+                  "cost": "description of the cost breakdown for the day, at least an estimate.",
+                  "contact": [{"name": "name of place", "number": "phone number"}]
+                }
+              ]
+            }
+          ]
 
         Now, here are the trip details:
 
