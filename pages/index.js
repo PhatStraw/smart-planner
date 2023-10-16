@@ -93,7 +93,7 @@ function Home() {
           }).json();
           setLoading(false);
           setPlan(response.data);
-          console.log("RES DATA",response.data)
+          console.log("RES DATA",response)
           resolve();  // Resolving the promise if everything goes well
         } catch (error) {
           setLoading(false);
