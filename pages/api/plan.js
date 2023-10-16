@@ -17,6 +17,7 @@ async function getPhotos(query) {
 
 export default async function handler(req) {
   const body = await req.json()
+  console.log(req.method)
   if (req.method === 'POST') {
     const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
 
