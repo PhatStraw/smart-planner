@@ -91,10 +91,8 @@ function Home() {
               budget, interest, sideNote
             }
           }).json();
-
           setLoading(false);
-          const data = JSON.parse(response.data).itinerary;
-          setPlan(data);
+          setPlan(response.data);
           resolve();  // Resolving the promise if everything goes well
         } catch (error) {
           setLoading(false);
@@ -126,10 +124,10 @@ function Home() {
       <NavBar />
       <div className="pt-20 px-5 w-[100%] h-full overflow-hidden ">
             {!loading ? (
-              <div className="w-[100%] pt-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-2 lg:gap-4 xl:gap-6 text-white">
+              <div className="w-[100%] pt-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-2 lg:gap-4 xl:gap-6">
                 {!plan ? (
                   <>
-                    {!welcome ? (<div className='flex flex-col justify-center h-full w-full text-white'>
+                    {!welcome ? (<div className='flex flex-col justify-center h-full w-full'>
                       <h1 className='text-center text-xl lg:text-2xl'>
                         Welcome To Smart Travel: The AI Travel Planner!
                       </h1>
@@ -142,7 +140,7 @@ function Home() {
                     )}
                   </>
                 ) : plan.map((i) => (
-                  <PlanCard key={i.day} day={i.day} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
+                  <PlanCard key={i.itinerary[0].day} image={i.image} day={i.itinerary[0].day} title={i.title} description={i.itinerary[0].description} cost={i.total} contact={i.itinerary[0].contact} number={i.itinerary[0].number} />
                 ))}
               </div>) : (
               <Loader type="balls" color="white" />

@@ -1,29 +1,34 @@
 export default function PlanCard(props) {
     return (
-        <div className="rounded overflow-y-auto m-1 bg-slate-100 border-gray-400 w-[100%] md:h-[350px]">
-            <div className="w-full rounded p-4 flex flex-col justify-between leading-normal">
-                <div className="mb-2">
-                    <p className="text-sm text-gray-600 flex items-center">
-                        Day {props.day}
+        <div className="rounded m-1  w-[100%] md:h-[450px]">
+            <img
+                className="object-cover w-full min-h-[240px] max-h-[600px] h-auto md:h-72 rounded-lg shadow-lg lg:h-80 xl:h-96"
+                src={props.image}
+                alt=""
+            />
+            <div className="w-full rounded pt-4 pl-1 flex flex-col justify-between leading-normal">
+                <div className="mb-3">
+                    <p className="text-xl mb-2 text-gray-600 flex items-center">
+                        Travel Plan #{props.day}
                     </p>
                     <div className="text-gray-900 font-bold text-xl">{props.title}</div>
                 </div>
-                <ul className="list-disc">
-                    {props.description?.map((i)=>(
+                {/* <ul className="list-disc">
+                    {props.description?.map((i) => (
                         <li key={i} className="text-gray-700 text-base ml-5 m-2">{i}</li>
                     ))}
-                </ul>
-                <div className="flex items-center">
-                    <div className="text-sm">
-                        <div className="flex flex-wrap">
-                        {props.contact.map((i)=>(
-                            <div className="m-1 pl-1" key={i.name}>
-                                <p className="text-gray-900 leading-none pb-1">{i.name}</p>
-                                <p className="text-gray-600 pb-1">{i.number}</p>
-                            </div>
-                        ))}
-                        </div>
-                        <p className="text-gray-600 pl-2">{props.cost}</p>
+                </ul> */}
+                <div className="flex items-left">
+                    <div className="text-xl">
+                        {/* <div className="flex flex-wrap">
+                            {props.contact.map((i) => (
+                                <div className="m-1 pl-1" key={i.name}>
+                                    <p className="text-gray-900 leading-none pb-1">{i.name}</p>
+                                    <p className="text-gray-600 pb-1">{i.number}</p>
+                                </div>
+                            ))}
+                        </div> */}
+                        <p className="text-gray-900 font-bold">${props.cost} Total</p>
                     </div>
                 </div>
             </div>

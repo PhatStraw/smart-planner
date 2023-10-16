@@ -5,17 +5,12 @@ import dynamic from 'next/dynamic'
 import { useCallback, useMemo, useState } from "react";
 import { formatISO } from 'date-fns';
 import { useRouter, useSearchParams } from 'next/navigation';
-import ky from 'ky';
-import toast, { Toaster } from 'react-hot-toast';
 import React from "react";
 import useSearchModal from "../../hooks/useSearchModal";
 
 import Modal from "./Modal";
 import Calendar from "../inputs/Calendar";
-import Counter from "../inputs/Counter";
-import CountrySelect, {
-    CountrySelectValue
-} from "../inputs/CountrySelect";
+import CountrySelect from "../inputs/CountrySelect";
 import Heading from '../Heading';
 import Nav from '../nav';
 

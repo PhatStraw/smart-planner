@@ -3,9 +3,20 @@ export const config = {
   runtime: "edge",
 };
 
+// Replace 'Your_Unsplash_Access_Key_Here' with your actual Unsplash Access Key
+const accessKey = process.env.NEXT_UNSPLASH_ACCESS;
+
+async function getPhotos(query) {
+  const response = await fetch(`https://api.unsplash.com/photos/random?query=${query}&client_id=${accessKey}`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok ' + response.statusText);
+  }
+  const data = await response.json();
+  return data.urls.regular;
+}
+
 export default async function handler(req) {
   const body = await req.json()
-  console.log(body)
   if (req.method === 'POST') {
     const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
 
@@ -18,19 +29,24 @@ export default async function handler(req) {
     try {
       const response = await openAiExtract.predict(
         `
-        You are a specialized travel planner. Generate an itinerary for a trip based on the provided details. Your response should be in JSON format as follows:
+        You are a specialized travel planner. Generate multiple plans for the user to choose from this includes an itinerary for the trip based on the provided details. Your response should be in JSON format as follows:
 
-        {
-          "itinerary": [
-            {
-              "day": 1, 
-              "title": "title representing the activities for the day",
-              "description": ["first activity description","second activity description"],
-              "cost": "description of the cost breakdown for the day, at least an estimate.",
-              "contact": [{"name": "name of place", "number": "phone number"}]
-            }
-          ]
-        }
+[  
+  {
+    "Option": 1,
+    "title": "Something describing the trip",
+    "total: "estimated total cost for this trip"
+    "itinerary": [
+      {
+        "day": 1, 
+        "title": "title representing the activities for the day",
+        "description": ["first activity description","second activity description"],
+        "cost": "description of the cost breakdown for the day, at least an estimate.",
+        "contact": [{"name": "name of place", "number": "phone number"}]
+      }
+    ]
+  }
+]
 
         Now, here are the trip details:
 
@@ -43,9 +59,10 @@ export default async function handler(req) {
 
         Each day should comprise at least two activities, last until 11pm, and include specific names, phone numbers, and reasons for visiting. If any information is missing, use the same format but include the error in the 'description' field.
       `);
-      const data = response
-      console.log(data)
-      return Response.json({ data })
+      const data = JSON.parse(response);
+      const final = await Promise.all(data.map(async (element) => ({ ...element, image: await getPhotos(element.title) })));
+
+      return Response.json({ data: final });
 
     } catch (error) {
       return Response.json({ error });
