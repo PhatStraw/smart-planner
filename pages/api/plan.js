@@ -67,7 +67,7 @@ export default async function handler(req) {
       return Response.json({ data: final });
 
     } catch (error) {
-      return Response.error({ error });
+      return Response.json({ error });
     }
   } else {
     return Response.error({ error: 'Method not allowed' });
