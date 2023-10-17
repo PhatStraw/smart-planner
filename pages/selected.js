@@ -72,93 +72,18 @@ function Home() {
   const queryParams = router.query
   const [loading, setLoading] = useState(false)
   const plansState = usePlans()
-
-  useEffect(()=>{
-    const makePlans = (params) => {
-      // Wrapping the async operation in a promise
-      const planPromise = new Promise(async (resolve, reject) => {
-        try {
-          const {
-            // userId,
-            // roomCount,
-            // guestCount,
-            // bathroomCount,
-            // category,
-            locationValue,
-            startDate,
-            endDate,
-            activity,
-            budget, 
-            interest, 
-            sideNote
-          } = params;
-          setLoading(true);
-          const response = await ky.post("/api/plan", {
-            timeout: 60000,
-            json: {
-              destination: locationValue, activity, startDate, endDate,
-              budget, interest, sideNote
-            }
-          }).json();
-          setLoading(false);
-
-          plansState.onNewPlans(response.data)
-          resolve();  // Resolving the promise if everything goes well
-        } catch (error) {
-          setLoading(false);
-          console.log(error)
-          reject(error);  // Rejecting the promise if there's an error
-        }
-      });
-  
-      // Passing the promise to toast.promise
-      toast.promise(
-        planPromise,
-        {
-          loading: 'Planning...',
-          success: <b>Plans saved!</b>,
-          error: <b>Could not plan.</b>,
-        }
-      );
-    };
-
-    if(queryParams.locationValue){
-      makePlans(queryParams)
-    }
-  },[queryParams])
-
-  const navToPlan = (plan) => {
-    plansState.onNewSelectedPlan(plan);
-    router.push("/selected");
-  }
+console.log(plansState)
   return (
 
     <div className="w-[100vw]">
       <NavBar />
       <div className="pt-20 px-5 w-[100%] h-full overflow-hidden ">
-            {!loading ? (
-              <div className="w-[100%] pt-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-2 lg:gap-4 xl:gap-6">
-                {!plansState.plans.length > 0 ? (
-                  <>
-                    {!welcome ? (<div className='flex flex-col justify-center h-full w-full'>
-                      <h1 className='text-center text-xl lg:text-2xl'>
-                        Welcome To Smart Travel: The AI Travel planner!
-                      </h1>
-                      <br></br>
-                      <div className='text-center text-xl lg:text-xl'>Select the options to your left...</div>
-                    </div>) : (
-                      welcome.map((i) => (
-                        <PlanCard key={i.day} day={i.day} image={i.image} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
-                      ))
-                    )}
-                  </>
-                ) : plansState.plans.map((i) => (
-                  <button onClick={() => navToPlan(i)}>
-                    <PlanCard key={i.itinerary[0].day} image={i.image} day={i.itinerary[0].day} title={i.title} description={i.itinerary[0].description} cost={i.total} contact={i.itinerary[0].contact} number={i.itinerary[0].number} />
-                  </button>
-                ))}
-              </div>) : (
-              <Loader type="balls" color="white" />
+            {plansState.selectedPlan.itinerary.length > 0 ? (
+                plansState.selectedPlan.itinerary.map((plan)=>(
+                    <div>{plan.title}</div>
+                ))
+            ) : (
+                <div>No plan</div>
             )}
         </div>
     </div>

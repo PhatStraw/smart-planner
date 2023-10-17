@@ -11,7 +11,7 @@ export default function PlanCard(props) {
                     <p className="text-xl mb-2 text-gray-600 flex items-center">
                         Travel Plan #{props.day}
                     </p>
-                    <div className="text-gray-900 font-bold text-xl">{props.title}</div>
+                    <div className="text-gray-900 font-bold text-xl text-left">{props.title}</div>
                 </div>
                 {/* <ul className="list-disc">
                     {props.description?.map((i) => (

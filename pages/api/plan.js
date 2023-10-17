@@ -26,7 +26,7 @@ export default async function handler(req) {
       if (missingParams.length > 0) {
         return Response.json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
       }
-
+      
       const response = await openAiExtract.predict(
         `
         You are a specialized travel planner. Generate multiple plans for the user to choose from this includes an itinerary for the trip based on the provided details. Your response should be in JSON format as follows:
@@ -59,6 +59,7 @@ export default async function handler(req) {
 
         Each day should comprise at least two activities, last until 11pm, and include specific names, phone numbers, and reasons for visiting. If any information is missing, use the same format but include the error in the 'description' field.
       `);
+console.log('62')
       const data = JSON.parse(response);
       const final = await Promise.all(data.map(async (element) => ({ ...element, image: await getPhotos(element.title) })));
 
