@@ -10,7 +10,7 @@ export default function SelectedPlan() {
     return (
         <div>
             <NavBar />
-            {plansState.selectedPlan ? (
+            {plansState.selectedPlan.length ? (
                 <div className="m-auto pt-24 rounded w-[100%] max-w-[1280px]">
                     <Carousel showThumbs={false} showStatus={false} showArrows={false}>
                         {plansState.selectedPlan.image.map((i) => (
