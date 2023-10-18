@@ -7,6 +7,7 @@ import NavBar from 'components/components/navbar/newNav';
 import { useRouter } from 'next/router'
 import usePlans from 'components/hooks/usePlans';
 import Link from 'next/link';
+import costa from '../public/costa.jpg'
 
 const welcome =  [
       {
@@ -15,7 +16,7 @@ const welcome =  [
         "description": ["Visit the National Museum of Natural History to learn about the history of the city and its culture","Take a walking tour of the city to explore the local architecture and landmarks"],
         "cost": "Admission to the museum is free, walking tour is $20 per person",
         "contact": [{"name": "National Museum of Natural History", "number": "123-456-7890"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       },
       {
         "day": 2, 
@@ -23,7 +24,7 @@ const welcome =  [
         "description": ["Spend the day at the beach, swimming and sunbathing","Visit the local seafood restaurant for dinner"],
         "cost": "Beach admission is free, dinner is $30 per person",
         "contact": [{"name": "Seafood Restaurant", "number": "098-765-4321"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       },
       {
         "day": 3, 
@@ -31,7 +32,7 @@ const welcome =  [
         "description": ["Go on a morning hike to explore the local nature","Visit the local market to shop for souvenirs"],
         "cost": "Hiking is free, shopping is variable",
         "contact": [{"name": "Local Market", "number": "111-222-3333"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       },
       {
         "day": 4, 
@@ -39,7 +40,7 @@ const welcome =  [
         "description": ["Visit the local art museum to learn about the city's culture","Attend a traditional dance performance in the evening"],
         "cost": "Admission to the museum is free, dance performance is $25 per person",
         "contact": [{"name": "Art Museum", "number": "444-555-6666"}, {"name": "Dance Performance", "number": "777-888-9999"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       },
       {
         "day": 5, 
@@ -47,7 +48,7 @@ const welcome =  [
         "description": ["Take a day trip to a nearby city to explore its attractions","Visit a local winery for a wine tasting"],
         "cost": "Transportation to the city is $50 per person, wine tasting is $20 per person",
         "contact": [{"name": "Local Winery", "number": "000-111-2222"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       },
       {
         "day": 6, 
@@ -55,7 +56,7 @@ const welcome =  [
         "description": ["Spend the day relaxing at the hotel spa","Visit a local restaurant for dinner"],
         "cost": "Spa treatments are $50 per person, dinner is $30 per person",
         "contact": [{"name": "Hotel Spa", "number": "333-444-5555"}, {"name": "Local Restaurant", "number": "666-777-8888"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       },
       {
         "day": 7, 
@@ -63,7 +64,7 @@ const welcome =  [
         "description": ["Visit the local park for a picnic lunch","Visit the airport for departure"],
         "cost": "Picnic lunch is free, airport transportation is $20 per person",
         "contact": [{"name": "Local Park", "number": "999-000-1111"}],
-        // "image": await getPhotos()
+        "image": [costa.src,costa.src,costa.src]
       }
     ]
 
@@ -148,7 +149,7 @@ function Home() {
                       <div className='text-center text-xl lg:text-xl'>Select the options to your left...</div>
                     </div>) : (
                       welcome.map((i) => (
-                        <PlanCard key={i.day} day={i.day} image={i.image} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
+                        <PlanCard key={i.day}  day={i.day} image={i.image} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
                       ))
                     )}
                   </>

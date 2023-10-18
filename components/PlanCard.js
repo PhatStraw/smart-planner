@@ -1,11 +1,20 @@
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 export default function PlanCard(props) {
     return (
-        <div className="rounded m-1  w-[100%] md:h-[450px]">
-            <img
-                className="object-cover w-full min-h-[240px] max-h-[600px] h-auto md:h-72 rounded-lg shadow-lg lg:h-80 xl:h-96"
-                src={props.image}
-                alt=""
-            />
+        <div className="rounded m-1 w-[100%] ">
+            <Carousel showThumbs={false} showStatus={false} showArrows={false}>
+                {props.image.map((i)=>(
+                    <div>
+                        <img
+                            src={i}
+                            alt=""
+                            className="rounded-lg shadow-lg"
+                        />
+                    </div>
+                ))}
+            </Carousel>
             <div className="w-full rounded pt-4 pl-1 flex flex-col justify-between leading-normal">
                 <div className="mb-3">
                     <p className="text-xl mb-2 text-gray-600 flex items-center">
