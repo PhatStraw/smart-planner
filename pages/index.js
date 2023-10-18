@@ -136,22 +136,16 @@ function Home() {
 
     <div className="w-[100vw]">
       <NavBar />
-      <div className="pt-20 px-5 w-[100%] h-full overflow-hidden ">
+      <div className="pt-20 px-5 w-[100%] max-w-[2360px] mx-auto h-full overflow-hidden ">
             {!loading ? (
-              <div className="w-[100%] pt-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-2 lg:gap-4 xl:gap-6">
+              <div className="w-[100%] pt-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-1 md:gap-2 lg:gap-4 xl:gap-6">
                 {!plansState.plans.length > 0 ? (
                   <>
-                    {!welcome ? (<div className='flex flex-col justify-center h-full w-full'>
-                      <h1 className='text-center text-xl lg:text-2xl'>
-                        Welcome To Smart Travel: The AI Travel planner!
-                      </h1>
-                      <br></br>
-                      <div className='text-center text-xl lg:text-xl'>Select the options to your left...</div>
-                    </div>) : (
+                    { 
                       welcome.map((i) => (
                         <PlanCard key={i.day}  day={i.day} image={i.image} title={i.title} description={i.description} cost={i.cost} contact={i.contact} number={i.number} />
                       ))
-                    )}
+                    }
                   </>
                 ) : plansState.plans.map((i) => (
                   <button key={i.itinerary[0].day} onClick={() => navToPlan(i)}>
@@ -159,7 +153,7 @@ function Home() {
                   </button>
                 ))}
               </div>) : (
-              <Loader type="balls" color="white" />
+              <Loader type="balls" color="black" />
             )}
         </div>
     </div>
