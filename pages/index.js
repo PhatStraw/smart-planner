@@ -154,7 +154,7 @@ function Home() {
                     )}
                   </>
                 ) : plansState.plans.map((i) => (
-                  <button onClick={() => navToPlan(i)}>
+                  <button key={i.itinerary[0].day} onClick={() => navToPlan(i)}>
                     <PlanCard key={i.itinerary[0].day} image={i.image} day={i.itinerary[0].day} title={i.title} description={i.itinerary[0].description} cost={i.total} contact={i.itinerary[0].contact} number={i.itinerary[0].number} />
                   </button>
                 ))}

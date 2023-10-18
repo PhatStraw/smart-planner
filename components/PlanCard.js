@@ -6,7 +6,7 @@ export default function PlanCard(props) {
         <div className="rounded m-1 w-[100%] ">
             <Carousel showThumbs={false} showStatus={false} showArrows={false}>
                 {props.image.map((i)=>(
-                    <div>
+                    <div key={i}>
                         <img
                             src={i}
                             alt=""

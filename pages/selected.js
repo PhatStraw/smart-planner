@@ -13,7 +13,7 @@ export default function SelectedPlan() {
             <div className="m-auto pt-24 rounded w-[100%] max-w-[1280px]">
                 <Carousel showThumbs={false} showStatus={false} showArrows={false}>
                     {plansState.selectedPlan.image.map((i) => (
-                        <div>
+                        <div key={i}>
                             <img
                                 src={i}
                                 alt=""
@@ -30,7 +30,7 @@ export default function SelectedPlan() {
                         {/* <div className="text-gray-900 font-bold text-xl text-left">{plansState.selectedPlan.total}</div> */}
                     </div>
                     {plansState.selectedPlan.itinerary.map((i) => (
-                        <div className="w-full rounded p-3 flex border-slate-300 mb-1 flex-col justify-between leading-normal border-t">
+                        <div key={i.day} className="w-full rounded p-3 flex border-slate-300 mb-1 flex-col justify-between leading-normal border-t">
                             <div className="mb-3">
                                 <p className="text-xl mb-2 text-gray-600 flex items-center">
                                     Day {i.day}
