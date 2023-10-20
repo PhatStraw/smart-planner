@@ -29,12 +29,14 @@ const SearchModal = () => {
     const [step, setStep] = useState(STEPS.LOCATION);
 
     const [location, setLocation] = useState();
+    const [childCount, setChildCount] = useState(0);
+    const [petCount, setPetCount] = useState(0);
     const [guestCount, setGuestCount] = useState(1);
     const [roomCount, setRoomCount] = useState(1);
     const [bathroomCount, setBathroomCount] = useState(1);
     const [activity, setActivity] = useState("")
     const [budget, setBudget] = useState()
-    const [interest, setInterest] = useState([])
+    const [allergies, setAllergies] = useState([])
     const [sideNote, setSideNote] = useState(" ")
     const [dateRange, setDateRange] = useState({
         startDate: new Date(),
@@ -70,16 +72,11 @@ const SearchModal = () => {
             ...currentQuery,
             locationValue: location?.value,
             guestCount,
-            roomCount,
-            bathroomCount,
-            sideNote,
-            interest: interest,
+            petCount,
+            childCount,
             budget,
-            activity
-            //Guest Count
-            //How mant Animals
-            //How many adults
-            //How mant kids
+            sideNote,
+            allergies: allergies,
             //Allergies?
             //Budget should be a range slider
             //Flights and hotels or just expierence 
@@ -94,7 +91,7 @@ const SearchModal = () => {
         }
       
         const invalidKeys = Object.keys(updatedQuery).filter(key => {
-            if (key === 'interest') {
+            if (key === 'allergies') {
                 return !Array.isArray(updatedQuery[key]) || updatedQuery[key].length === 0;
             }else if(key === 'budget'){
                 return updatedQuery[key] === undefined
@@ -116,8 +113,7 @@ const SearchModal = () => {
         }, { skipNull: true });
 
         setStep(STEPS.LOCATION);
-        setInterest([])
-        setActivity("")
+        setAllergies([])
         setBudget()
         searchModal.onClose();
         router.push(url);
@@ -126,16 +122,17 @@ const SearchModal = () => {
             step,
             searchModal,
             location,
-            budget,
-            interest,
-            activity,
+            allergies,
             sideNote,
             router,
             guestCount,
-            roomCount,
+            budget,
+            // roomCount,
+            petCount,
+            childCount,
             dateRange,
             onNext,
-            bathroomCount,
+            // bathroomCount,
             params
         ]);
 
@@ -219,9 +216,15 @@ const SearchModal = () => {
             <Info
             setActivity={setActivity}
             setBudget={setBudget}
-            setInterest={setInterest}
-            interest={interest}
+            setAllergies={setAllergies}
+            allergies={allergies}
             setSideNote={setSideNote}
+            guestCount={guestCount}
+            setGuestCount={setGuestCount}
+            petCount={petCount}
+            setPetCount={setPetCount}
+            childCount={childCount}
+            setChildCount={setChildCount}
           />
         )
     }

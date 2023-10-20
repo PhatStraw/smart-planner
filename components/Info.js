@@ -1,52 +1,94 @@
+import 'rheostat/initialize';
+import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
+import aphroditeInterface from 'react-with-styles-interface-aphrodite';
+import DefaultTheme from 'rheostat/lib/themes/DefaultTheme';
+ThemedStyleSheet.registerInterface(aphroditeInterface);
+ThemedStyleSheet.registerTheme(DefaultTheme);
+
 import Select from 'react-select';
 import DatePickerComp from 'components/components/datePicker';
+import Counter from './inputs/Counter';
+import Rheostat from 'rheostat';
 const activityOptions = [
   { value: "low", label: "low" },
   { value: "medium", label: "medium" },
   { value: "high", label: "high" }
 ];
 
-const InterestOptions = [
-  { value: "local culture", label: "local culture" },
-  { value: "trying new food", label: "trying new food" },
-  { value: "Adventure and Outdoor Activities", label: "Adventure and Outdoor Activities" },
-  { value: "Visiting Historical or Significant Sites", label: "Visiting Historical or Significant Sites" },
-  { value: "Relaxation and Wellness", label: "Relaxation and Wellness" },
-  { value: "Capturing Photographs", label: "Capturing Photographs" },
-  { value: "Attending Events or Festivals", label: "Attending Events or Festivals" },
-  { value: "Shopping", label: "Shopping" },
-  { value: "Meeting New People", label: "Meeting New People" },
-  { value: "Nature and Wildlife", label: "Nature and Wildlife" },
-  { value: "Sports", label: "Sports" },
-  { value: "Art and Music", label: "Art and Music" },
-];
+const AllergyOptions = [
+  { "value": "Cow's milk", "label": "Cow's Milk Allergy" },
+  { "value": "Eggs", "label": "Egg Allergy" },
+  { "value": "Fish", "label": "Fish Allergy" },
+  { "value": "Shellfish", "label": "Shellfish Allergy" },
+  { "value": "Wheat", "label": "Wheat Allergy" },
+  { "value": "Peanuts", "label": "Peanut Allergy" },
+  { "value": "Tree nuts", "label": "Tree Nut Allergy" },
+  { "value": "Soy", "label": "Soy Allergy" },
+  { "value": "Sesame", "label": "Sesame Allergy" },
+  { "value": "Animal dander", "label": "Animal Dander Allergy" },
+  { "value": "Pollen", "label": "Pollen Allergy" },
+  { "value": "Dust", "label": "Dust Allergy" },
+  { "value": "Insect bites", "label": "Insect Bite Allergy" },
+  { "value": "Medications", "label": "Medication Allergy" },
+  { "value": "Almonds", "label": "Almond Allergy" },
+  { "value": "Cashews", "label": "Cashew Allergy" },
+  { "value": "Pistachios", "label": "Pistachio Allergy" }
+]
+
 export default function Info(props) {
   return (
     <div className='w-full flex flex-col'>
       <div className='w-full rounded'>
         <h2 className='md:text-2xl text-slate-900 text-center mt-1 border-b border-b-4 mb-2 border-b-[#076AE0]'>Plan a trip</h2>
         <ul className="text-slate w-full space-y-4">
-          <li className=''>
-            <span className="text-slate-900 flex-1 slate-100space-nowrap">Activity</span>
-            <Select options={activityOptions} onChange={(e) => { props.setActivity(e.value) }} className='w-full rounded-md border-0  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' placeholder="option" />
+          <li>
+            <Counter
+              onChange={(value) => props.setGuestCount(value)}
+              value={props.guestCount}
+              title="Guests"
+              subtitle="How many guests are coming?"
+            />
+          </li>
+          <li>
+            <Counter
+              onChange={(value) => props.setPetCount(value)}
+              value={props.petCount}
+              title="Pets"
+              subtitle="How many pets are coming?"
+            />
+          </li>
+          <li>
+            <Counter
+              onChange={(value) => props.setChildCount(value)}
+              value={props.childCount}
+              title="Kids"
+              subtitle="How many children under 13yrs?"
+            />
           </li>
           <li className=''>
-            <span className="text-slate-900 flex-1 slate-100space-nowrap">Budget</span>
-            <input type="text" onChange={(e) => { props.setBudget(e.target.value) }} name="price" id="price" className="block w-full rounded-md border-0 py-1.5  text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="0.00" />
-          </li>
-          <li className=''>
-            <span className="text-slate-900 flex-1 slate-100space-nowrap">Interest</span>
-            <Select isMulti={true} options={InterestOptions} onChange={(e) => {
-              props.setInterest([])
+            <span className="text-slate-900 flex-1 slate-100space-nowrap">Allergies</span>
+            <Select isMulti={true} options={AllergyOptions} onChange={(e) => {
+              props.setAllergies([])
               e.map((i) => {
-                if (props.interest.length > 0) {
-                  props.setInterest([...props.interest, i.value])
+                if (props.allergies.length > 0) {
+                  props.setAllergies([...props.allergies, i.value])
                 } else {
-                  props.setInterest([i.value])
+                  props.setAllergies([i.value])
                 }
               }
               )
             }} placeholder="options" />
+          </li>
+          <li className=''>
+            <span className="text-slate-900 flex-1 slate-100space-nowrap">Budget</span>
+            <div className='mt-2'>
+              <Rheostat
+                min={1}
+                max={100}
+                values={[1, 100]}
+                onValuesUpdated={(e) => props.setBudget(e.values)}
+              />
+            </div>
           </li>
           <li className=''>
             <label for="message" class="block mb-2 text-md font-medium text-slate-900 dark:text-slate-100">Details</label>

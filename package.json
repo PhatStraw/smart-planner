@@ -35,6 +35,8 @@
     "react-responsive-carousel": "^3.2.23",
     "react-select": "^5.7.7",
     "react-svg": "^16.1.28",
+    "react-with-styles-interface-aphrodite": "^6.0.1",
+    "rheostat": "^4.1.1",
     "world-countries": "^5.0.0",
     "zustand": "^4.4.3"
   },

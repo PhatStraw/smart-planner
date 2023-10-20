@@ -12,7 +12,7 @@ export async function getPhotos(query) {
   }
   
   const data = await response.json();
-  console.log("DATA", data)
+  
   data.forEach(element => {
     urls.push(element.urls.regular)
   });
@@ -23,7 +23,7 @@ export default async function handler(req) {
   const body = await req.json()
   if (req.method === 'POST') {
     try {
-      const requiredParams = ['destination', 'budget', 'activity', 'interest', 'startDate', 'endDate', 'sideNote'];
+      const requiredParams = ['destination', 'budget', 'startDate', 'endDate', 'sideNote'];
   
       // Check if all required parameters are present in body
       const missingParams = requiredParams.filter(param => !(param in body));
@@ -56,9 +56,10 @@ export default async function handler(req) {
         Now, here are the trip details:
 
         - Destination: ${body.destination}
-        - Budget: ${body.budget}
-        - Activity Level: ${body.activity}
-        - Emphasis on: ${body.interest}
+        - Amount of kids under 13yrs old: ${body.childCount}
+        - In a budget between: ${body.budget[0]} and  ${body.budget[1]}
+        - Pet count: ${body.petCount}
+        - My allergies: ${body.interest}
         - Travel Dates: ${body.startDate} to ${body.endDate}
         - Note: ${body.sideNote}
 
