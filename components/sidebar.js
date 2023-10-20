@@ -1,7 +1,7 @@
 import Logo from '../public/logo.png'
 import React, { useEffect } from "react";
 import Image from 'next/image';
-import Nav from './nav';
+import Nav from './Info';
 
 export default function SideBar(props) {
   useEffect(() => {

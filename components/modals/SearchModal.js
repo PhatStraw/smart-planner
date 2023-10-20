@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { useCallback, useMemo, useState } from "react";
 import { formatISO } from 'date-fns';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { toast } from 'react-hot-toast';
 import React from "react";
 import useSearchModal from "../../hooks/useSearchModal";
 
@@ -12,7 +13,7 @@ import Modal from "./Modal";
 import Calendar from "../inputs/Calendar";
 import CountrySelect from "../inputs/CountrySelect";
 import Heading from '../Heading';
-import Nav from '../nav';
+import Info from '../Info';
 
 const STEPS = {
     LOCATION: 0,
@@ -75,6 +76,13 @@ const SearchModal = () => {
             interest: interest,
             budget,
             activity
+            //Guest Count
+            //How mant Animals
+            //How many adults
+            //How mant kids
+            //Allergies?
+            //Budget should be a range slider
+            //Flights and hotels or just expierence 
         };
 
         if (dateRange.startDate) {
@@ -83,6 +91,23 @@ const SearchModal = () => {
 
         if (dateRange.endDate) {
             updatedQuery.endDate = formatISO(dateRange.endDate);
+        }
+      
+        const invalidKeys = Object.keys(updatedQuery).filter(key => {
+            if (key === 'interest') {
+                return !Array.isArray(updatedQuery[key]) || updatedQuery[key].length === 0;
+            }else if(key === 'budget'){
+                return updatedQuery[key] === undefined
+            }
+             else {
+                return updatedQuery[key] === '';
+            }
+        });
+        
+        if (invalidKeys.length > 0) {
+            const invalidFields = invalidKeys.join(', ');
+            toast.error(`Invalid fields found in updatedQuery: ${invalidFields}`);
+            return;
         }
 
         const url = qs.stringifyUrl({
@@ -191,7 +216,7 @@ const SearchModal = () => {
             //         subtitle="How many bahtrooms do you need?"
             //     />
             // </div>
-            <Nav
+            <Info
             setActivity={setActivity}
             setBudget={setBudget}
             setInterest={setInterest}
@@ -216,3 +241,7 @@ const SearchModal = () => {
 }
 
 export default SearchModal;
+
+
+
+

@@ -20,7 +20,7 @@ const InterestOptions = [
   { value: "Sports", label: "Sports" },
   { value: "Art and Music", label: "Art and Music" },
 ];
-export default function Nav(props) {
+export default function Info(props) {
   return (
     <div className='w-full flex flex-col'>
       <div className='w-full rounded'>
@@ -44,7 +44,6 @@ export default function Nav(props) {
                 } else {
                   props.setInterest([i.value])
                 }
-                console.log(props.interest)
               }
               )
             }} placeholder="options" />
