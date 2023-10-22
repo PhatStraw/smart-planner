@@ -75,10 +75,10 @@ export default function SelectedPlan() {
         // Create a download link and trigger the download
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'selectedPlan.pdf';
+        link.download = 'TravelPlan.pdf';
         link.click();
     };
-    
+
     return (
         <div>
             <NavBar />

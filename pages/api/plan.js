@@ -12,7 +12,7 @@ export async function getPhotos(query) {
   }
   
   const data = await response.json();
-  
+
   data.forEach(element => {
     urls.push(element.urls.regular)
   });
@@ -40,7 +40,7 @@ export default async function handler(req) {
             {
               "Option": 1,
               "title": "Something describing the trip",
-              "total: "estimated total cost for this trip"
+              "total: "estimated total cost for this trip as a whole number."
               "itinerary": [
                 {
                   "day": 1, 
