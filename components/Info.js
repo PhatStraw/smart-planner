@@ -6,14 +6,8 @@ ThemedStyleSheet.registerInterface(aphroditeInterface);
 ThemedStyleSheet.registerTheme(DefaultTheme);
 
 import Select from 'react-select';
-import DatePickerComp from 'components/components/datePicker';
 import Counter from './inputs/Counter';
 import Rheostat from 'rheostat';
-const activityOptions = [
-  { value: "low", label: "low" },
-  { value: "medium", label: "medium" },
-  { value: "high", label: "high" }
-];
 
 const AllergyOptions = [
   { "value": "Cow's milk", "label": "Cow's Milk Allergy" },

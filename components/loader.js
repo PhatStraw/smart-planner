@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import Loaderr from "../public/Loading-modified.svg"
-import { ReactSVG } from 'react-svg';
 import Image from 'next/image';
 
 const Loader = ({ type, color }) => (
