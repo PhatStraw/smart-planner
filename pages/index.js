@@ -175,11 +175,10 @@ function Home() {
       <div className="pt-20 px-5 w-[100%] max-w-[2360px] mx-auto h-full overflow-hidden ">
         {!loading ? (
           !plansState.plans.length > 0 ? (
-            <Image
-              src={getStart}
-              alt=""
-              className="rounded-lg mt-10 shadow-lg mx-auto w-full md:w-1/2 max-h-[100vh]"
-            />
+            <div className="mt-10 m-auto flex flex-col text-center items-center justify-center">
+              <h1 className="text-5xl p-2">Getting Started</h1>
+              <h3 className="text-3xl ">To get started with our app, simply click on the search bar.</h3>
+            </div>
           ) : (
             <div className="w-[100%] pt-2 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-1 md:gap-2 lg:gap-4 xl:gap-6">
               {plansState.plans.map((i) => (

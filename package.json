@@ -17,6 +17,7 @@
     "eslint-config-next": "13.5.4",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
+    "geist": "^1.0.0",
     "ky": "^1.0.1",
     "langchain": "^0.0.163",
     "next": "13.5.4",
