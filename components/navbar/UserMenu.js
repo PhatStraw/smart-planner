@@ -73,6 +73,7 @@ const UserMenu = ({
             md:w-3/4 
             bg-white 
             overflow-hidden 
+            min-w-[90px]
             right-0 
             top-12 
             text-sm

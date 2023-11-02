@@ -1,4 +1,5 @@
 import { openAiExtract } from '../../utils/OpenAIExtract.js';
+
 export const config = {
   runtime: "edge",
 };
@@ -29,7 +30,7 @@ export default async function handler(req) {
       const missingParams = requiredParams.filter(param => !(param in body));
   
       if (missingParams.length > 0) {
-        return Response.json({ error: `Missing required parameters: ${missingParams.join(', ')}` });
+        return new Response(JSON.stringify({ error: `Missing required parameters: ${missingParams.join(', ')}` }), { status: 400 });
       }
 
       const response = await openAiExtract.predict(
@@ -54,7 +55,6 @@ export default async function handler(req) {
           ]
 
         Now, here are the trip details:
-
         - Destination: ${body.destination}
         - Amount of kids under 13yrs old: ${body.childCount}
         - In a budget between: ${body.budget[0]} and  ${body.budget[1]}
@@ -68,13 +68,13 @@ export default async function handler(req) {
 
       const data = JSON.parse(response);
       const final = await Promise.all(data.map(async (element) => ({ ...element, image: await getPhotos(element.title) })));
-
-      return Response.json({ data: final });
+      console.log(data)
+      return new Response(JSON.stringify({ data: final }), { status: 200 });
 
     } catch (error) {
-      return Response.error({ error });
+      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     }
   } else {
-    return Response.error({ error: 'Method not allowed' });
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), { status: 405 });
   }
 }
